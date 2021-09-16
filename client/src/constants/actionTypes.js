@@ -1,0 +1,3 @@
+export const FETCH_ALL_PRODUCTS = "FETCH_ALL_PRODUCTS";
+export const START_LOADING = "START_LOADING";
+export const END_LOADING = "END_LOADING";
