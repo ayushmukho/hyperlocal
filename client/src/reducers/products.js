@@ -1,8 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { FETCH_ALL_PRODUCTS, START_LOADING, END_LOADING } from "../constants/actionTypes";
 
-
-export default (state = { isLoading: true, products: [] }, action) => {
+export const productReducer =  (state = { isLoading: true, products: [] }, action) => {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true }
