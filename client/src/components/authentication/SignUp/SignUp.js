@@ -1,41 +1,29 @@
 import * as React from "react";
 
-import Button from "@mui/material/Button";
-
-import TextField from "@mui/material/TextField";
-
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Typography from "@mui/material/Typography";
-import useStyles from './styles';
 import {
-  Card,
+  Grid,
+  Typography,
+  Box,
   Container,
-  FilledInput,
+  TextField,
   FormControl,
-  IconButton,
+  InputLabel,
   Input,
   InputAdornment,
-  InputLabel,
-  ListItem,
-  makeStyles,
-} from "@mui/material";
+  IconButton,
+  Button,
+  Link,
+} from "@material-ui/core";
 
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
-import bg from '../../../images/img.png'
-import text from '../../../images/text.png'
-import ellipse from '../../../images/ellipse.png'
+import useStyles from "./styles";
 
+import sally from "../../../images/sally.png";
+import logo from "../../../images/logo.png";
+import ellipse from "../../../images/ellipse.png";
 
-
-
-
-function SignUp() {
+const SignUp = () => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     password: "",
@@ -70,15 +58,21 @@ function SignUp() {
 
   return (
     <Container className={classes.toplevel1}>
-      <Grid container spacing={2} columns={16} className={classes.toplevel2}>
-        <Grid item xs={8} className={classes.sublevel1}>
+      <Grid container className={classes.toplevel2}>
+        <Grid item xs={5} className={classes.sublevel1}>
           <div class="photo">
-          <img className={classes.img1} src={text}/>
-            <img className={classes.img2} src={bg} />
-            <img className={classes.img3} src={ellipse} />
+            <img alt="logo" className={classes.logo} src={logo} />
+
+            <Typography className={classes.text}>
+              Find all types of everyday items at your arms reach{" "}
+            </Typography>
+
+            <img className={classes.sally} alt="sally" src={sally} />
+            <img className={classes.ellipse} alt="ellipse" src={ellipse} />
           </div>
         </Grid>
-        <Grid item xs={8} className={classes.sublevel2}>
+
+        <Grid item xs={7} className={classes.sublevel2}>
           <Box
             sx={{
               my: 8,
@@ -147,6 +141,7 @@ function SignUp() {
 
               <Button
                 type="submit"
+                color="primary"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -166,6 +161,6 @@ function SignUp() {
       </Grid>
     </Container>
   );
-}
+};
 
 export default SignUp;
