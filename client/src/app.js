@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "./actions/products";
+import SignUp from "./components/authentication/SignUp/SignUp";
 const App = () => {
   const parcel = useSelector((state) => state.allProducts);
   const { products, isLoading } = parcel;
@@ -18,7 +19,10 @@ const App = () => {
   return isLoading ? (
     <h1>Kuch nahi h randi....Loading</h1>
   ) : (
-    products.map((product, i) => <h1 key={i}>{product.title}</h1>)
+    <>
+    <SignUp/>
+ )
+    </>
   );
 };
 
