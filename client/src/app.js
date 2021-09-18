@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "./actions/products";
 import SignUp from "./components/authentication/SignUp/SignUp";
+import Product from "./components/Products/Product/Product";
 const App = () => {
   const parcel = useSelector((state) => state.allProducts);
   const { products, isLoading } = parcel;
@@ -17,11 +18,10 @@ const App = () => {
   console.log("Loading: ", isLoading);
 
   return isLoading ? (
-    <h1>Kuch nahi h randi....Loading</h1>
+    <h1>Loading...</h1>
   ) : (
     <>
-    <SignUp/>
- )
+      <Product />)
     </>
   );
 };
