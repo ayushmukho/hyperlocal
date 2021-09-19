@@ -34,10 +34,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
-    sellerCategory: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-    },
     isAdmin: {
       type: Boolean,
       required: true,

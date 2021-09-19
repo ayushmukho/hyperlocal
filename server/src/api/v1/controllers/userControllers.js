@@ -61,25 +61,26 @@ export const login = async (req, res) => {
 };
 
 export const applySeller = async (req, res) => {
-  const { description, categoryid } = req.body;
-  const category = await Category.findById(categoryid);
+  const { description } = req.body;
   const newApplication = await SellerApplication.create({
     user: req.user._id,
-    category: category._id,
     description,
   });
   res.status(200).json({ message: "Application sent", data: newApplication });
 };
 
+export const getAllApplication = async (_req, res) => {
+  const applications = await SellerApplication.find({});
+  res.status(200).json({ message: "Successful", data: applications });
+};
+
 export const approveSeller = async (req, res) => {
   const application = await SellerApplication.findById(req.params.id);
   const userid = application.user;
-  const categoryid = application.category;
   await User.updateOne(
     { _id: userid },
     {
       isSeller: true,
-      sellerCategory: categoryid,
     }
   );
   await SellerApplication.deleteOne({ _id: application._id });

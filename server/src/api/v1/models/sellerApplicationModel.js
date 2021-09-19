@@ -7,11 +7,6 @@ const sellerApplicationSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Category",
-    },
     description: {
       type: String,
       required: true,

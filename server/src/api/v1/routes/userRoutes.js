@@ -3,6 +3,7 @@ import expressAsyncHandler from "express-async-handler";
 import {
   applySeller,
   approveSeller,
+  getAllApplication,
   login,
   makeAdmin,
   register,
@@ -45,6 +46,17 @@ userRouter
     expressAsyncHandler(verifyToken),
     expressAsyncHandler(isAdmin),
     expressAsyncHandler(approveSeller)
+  )
+  /**
+   * @desc get all applucation
+   * @router api/user/seller/applications
+   * @access Admin
+   */
+  .get(
+    "/seller/applications",
+    expressAsyncHandler(verifyToken),
+    expressAsyncHandler(isAdmin),
+    expressAsyncHandler(getAllApplication)
   )
   /**
    * @desc reject seller
