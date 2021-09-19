@@ -7,13 +7,13 @@ const authRouter = Router();
 authRouter
   /**
    * @desc register
-   * @route auth/register
+   * @route api/auth/register
    * @access Public
    */
   .post("/register", expressAsyncHandler(register))
   /**
    * @desc login
-   * @router auth/login
+   * @router api/auth/login
    * @access Public
    */
   .post("/login", expressAsyncHandler(login));
