@@ -43,7 +43,7 @@ export const login = async (req, res) => {
     throw new Error("Wrong Email");
   }
 
-  const isPassValid = bcrypt.compare(password, user.password);
+  const isPassValid = await bcrypt.compare(password, user.password);
   if (!isPassValid) {
     res.status(422);
     throw new Error("Wrong Password");

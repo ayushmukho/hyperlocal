@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: true,
     },
     isVerified: {
       type: Boolean,
@@ -25,8 +26,17 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isSeller: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    sellerCatergory: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
     isAdmin: {
-      type: String,
+      type: Boolean,
       required: true,
       default: false,
     },

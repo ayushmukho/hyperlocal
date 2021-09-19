@@ -8,7 +8,7 @@ export const verifyToken = (req, res, next) => {
   if (token) {
     jwt.verify(token, vars.jwtSecret, async (err, decodedToken) => {
       if (err) {
-        res.status(401).json({ message: "Invalid Token" });
+        res.status(422).json({ message: "Invalid Token" });
       } else {
         const user = await User.findById(decodedToken.userId);
         req.user = user;
@@ -16,7 +16,23 @@ export const verifyToken = (req, res, next) => {
       }
     });
   } else {
-    res.status(401);
+    res.status(422);
     throw new Error("Access Denied");
   }
+};
+
+export const isAdmin = (req, res, next) => {
+  if (!req.user.isAdmin) {
+    res.status(422);
+    throw new Error("Access Denied");
+  }
+  next();
+};
+
+export const isSeller = (req, res, next) => {
+  if (!req.user.isSeller) {
+    res.status(422);
+    throw new Error("Access Denied");
+  }
+  next();
 };
