@@ -1,6 +1,6 @@
 import Router from "express";
-import { allProducts, oneProduct } from "../controllers/productController.js";
-import asyncHandler from "express-async-handler";
+import { allProducts, oneProduct } from "../controllers/productControllers.js";
+import expressAsyncHandler from "express-async-handler";
 
 const productRouter = Router();
 
@@ -10,11 +10,11 @@ productRouter
    * @route /api/products
    * @access Public
    */
-  .get("/", asyncHandler(allProducts))
+  .get("/", expressAsyncHandler(allProducts))
   /**
    * @desc fetch one product
    * @route /api/products/:id
    * @access Public
    */
-  .get("/:id", asyncHandler(oneProduct));
+  .get("/:id", expressAsyncHandler(oneProduct));
 export default productRouter;
