@@ -60,6 +60,11 @@ export const login = async (req, res) => {
     .json({ message: "Success", data: { access_token: token, user: user } });
 };
 
+export const getAllSellers = async (_req, res) => {
+  const sellers = await User.find({ isSeller: true });
+  res.status(200).json({ message: "Succesful", data: sellers });
+};
+
 export const applySeller = async (req, res) => {
   const { description } = req.body;
   const newApplication = await SellerApplication.create({

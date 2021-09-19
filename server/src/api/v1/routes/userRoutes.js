@@ -4,6 +4,7 @@ import {
   applySeller,
   approveSeller,
   getAllApplication,
+  getAllSellers,
   login,
   makeAdmin,
   register,
@@ -26,6 +27,12 @@ userRouter
    * @access Public
    */
   .post("/login", expressAsyncHandler(login))
+  /**
+   * @desc get all sellers
+   * @route api/user/seller/
+   * @access Public
+   */
+  .get("/seller", expressAsyncHandler(getAllSellers))
   /**
    * @desc apply to become a seller
    * @route api/user/seller/apply
