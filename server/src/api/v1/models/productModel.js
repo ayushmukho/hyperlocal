@@ -22,7 +22,7 @@ const reviewSchema = mongoose.Schema(
 
 const productSchema = new mongoose.Schema(
   {
-    user: {
+    seller: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
@@ -34,14 +34,16 @@ const productSchema = new mongoose.Schema(
     image: {
       type: String,
       required: true,
+      default:
+        "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-image.jpg",
     },
     brand: {
       type: String,
-      required: true,
     },
     category: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "Category",
     },
     description: {
       type: String,
