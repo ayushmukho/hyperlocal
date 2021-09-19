@@ -1,6 +1,7 @@
 import Router from "express";
 import { allProducts, oneProduct } from "../controllers/productControllers.js";
 import expressAsyncHandler from "express-async-handler";
+import { verifyToken } from "../middlewares/authMiddleware.js";
 
 const productRouter = Router();
 
