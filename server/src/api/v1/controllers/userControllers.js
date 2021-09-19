@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import vars from "../../../config/vars.js";
 import Joi from "joi";
+import Category from "../models/categoryModel.js";
+import SellerApplication from "../models/sellerApplicationModel.js";
 
 export const register = async (req, res) => {
   const { email, username, password } = req.body;
@@ -56,4 +58,46 @@ export const login = async (req, res) => {
   res
     .status(200)
     .json({ message: "Success", data: { access_token: token, user: user } });
+};
+
+export const applySeller = async (req, res) => {
+  const { description, categoryid } = req.body;
+  const category = await Category.findById(categoryid);
+  const newApplication = await SellerApplication.create({
+    user: req.user._id,
+    category: category._id,
+    description,
+  });
+  res.status(200).json({ message: "Application sent", data: newApplication });
+};
+
+export const approveSeller = async (req, res) => {
+  const application = await SellerApplication.findById(req.params.id);
+  const userid = application.user;
+  const categoryid = application.category;
+  await User.updateOne(
+    { _id: userid },
+    {
+      isSeller: true,
+      sellerCategory: categoryid,
+    }
+  );
+  await SellerApplication.deleteOne({ _id: application._id });
+  res.status(200).json({ message: "Application approved", data: null });
+};
+
+export const rejectSeller = async (req, res) => {
+  const application = await SellerApplication.findById(req.params.id);
+  await SellerApplication.deleteOne({ _id: application._id });
+  res.status(200).json({ message: "Application approved", data: null });
+};
+
+export const makeAdmin = async (req, res) => {
+  await User.updateOne(
+    { _id: req.params.id },
+    {
+      isAdmin: true,
+    }
+  );
+  res.status(200).json({ message: `User made admin`, data: null });
 };
