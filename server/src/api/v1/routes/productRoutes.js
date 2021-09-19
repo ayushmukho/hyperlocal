@@ -31,13 +31,13 @@ productRouter
    * @route /api/products/:categoryid
    * @access Public
    */
-  .get("/:categoryid", expressAsyncHandler(allProductsByCategory))
+  .get("/category/:categoryid", expressAsyncHandler(allProductsByCategory))
   /**
    * @desc fetch all products by seller
    * @route /api/products/:sellerid
    * @access Public
    */
-  .get("/:sellerid", expressAsyncHandler(allProductsBySeller))
+  .get("/seller/:sellerid", expressAsyncHandler(allProductsBySeller))
   /**
    * @desc create a product
    * @route /api/products/
