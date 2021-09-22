@@ -202,7 +202,7 @@ export const getAccessToken = async (req, res) => {
     res.status(400);
     throw new Error("Please Login!");
   }
-  jwt.verify(refreshtoken, vars.refreshToken, (err, { id }) => {
+  jwt.verify(refreshtoken, vars.refreshToken, async (err, { id }) => {
     if (err) {
       res.status(400).json({ message: "please Login" });
     }

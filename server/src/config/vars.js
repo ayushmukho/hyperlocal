@@ -43,6 +43,6 @@ export default {
   /**
    * google
    */
-  googleClienId=process.env.MAILING_SERVICE_CLIENT_ID,
-  googleSecret=process.env.GOOGLE_SECRET
+  googleClienId: process.env.MAILING_SERVICE_CLIENT_ID,
+  googleSecret: process.env.GOOGLE_SECRET,
 };
