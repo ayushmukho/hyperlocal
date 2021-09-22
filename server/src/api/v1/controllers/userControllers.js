@@ -132,6 +132,7 @@ export const googleLogin = async (req, res) => {
     idToken: tokenid,
     audience: vars.googleClienId,
   });
+  console.log(verify);
   const { email_verified, email, name, picture } = verify;
 
   const password = email + vars.googleSecret;
