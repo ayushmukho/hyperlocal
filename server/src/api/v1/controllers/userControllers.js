@@ -189,6 +189,8 @@ export const googleLogin = async (req, res) => {
       });
     }
   }
+  res.status(402);
+  throw new Error("Email not verified");
 };
 
 /**
