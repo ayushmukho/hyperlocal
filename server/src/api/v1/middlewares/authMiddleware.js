@@ -24,7 +24,7 @@ export const verifyToken = (req, res, next) => {
 export const isAdmin = (req, res, next) => {
   if (!req.user.isAdmin) {
     res.status(422);
-    throw new Error("Access Denied");
+    throw new Error("Admin resources, Access Denied");
   }
   next();
 };
@@ -32,7 +32,7 @@ export const isAdmin = (req, res, next) => {
 export const isSeller = (req, res, next) => {
   if (!req.user.isSeller) {
     res.status(422);
-    throw new Error("Access Denied");
+    throw new Error("Seller resources, Access Denied");
   }
   next();
 };
