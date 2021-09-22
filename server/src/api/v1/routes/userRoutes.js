@@ -7,6 +7,7 @@ import {
   getAccessToken,
   getAllApplication,
   getAllSellers,
+  googleLogin,
   login,
   makeAdmin,
   register,
@@ -40,7 +41,7 @@ userRouter
    * @route api/user/login
    * @access Public
    */
-  .post("/google_login", expressAsyncHandler(login))
+  .post("/google_login", expressAsyncHandler(googleLogin))
   /**
    * @desc refreshtoken
    * @route api/user/refresh_token
