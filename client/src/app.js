@@ -1,27 +1,20 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "./actions/products";
-import SignUp from "./components/authentication/SignUp/SignUp";
-import Product from "./components/Products/Product/Product";
-const App = () => {
-  const parcel = useSelector((state) => state.allProducts);
-  const { products, isLoading } = parcel;
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getProducts());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+
+import SignUp from "./components/authentication/SignUp/SignUp";
+import Products from "./components/Products/Products";
+const App = () => {
+  const parcel = useSelector((state) => state.user);
 
   // console.log("Product: ", parcel.products)
-  console.log("Products: ", products);
-  console.log("Loading: ", isLoading);
+  console.log("User: ", parcel);
 
-  return isLoading ? (
-    <h1>Loading...</h1>
-  ) : (
+  return (
     <>
-      <Product />)
+      <ToastContainer />
+      <SignUp />
+      
     </>
   );
 };

@@ -128,19 +128,20 @@ export const login = async (req, res) => {
  */
 export const googleLogin = async (req, res) => {
   const { tokenid } = req.body;
-  console.log(tokenid);
-  console.log(vars.googleClienId);
+
   const verify = await client.verifyIdToken({
     idToken: tokenid,
     audience: vars.googleClienId,
   });
-  console.log(verify);
-  const { email_verified, email, name, picture } = verify;
+
+  const {
+    payload: { email_verified, email, name, picture },
+  } = verify;
 
   const password = email + vars.googleSecret;
 
   if (email_verified) {
-    const user = await User.find({ email });
+    const user = await User.findOne({ email });
 
     if (user) {
       const isPassValid = await bcrypt.compare(password, user.password);

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   Grid,
   Typography,
@@ -14,6 +13,13 @@ import {
   Button,
   Link,
 } from "@material-ui/core";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { GoogleLogin } from "react-google-login";
+
+import "react-toastify/dist/ReactToastify.css";
+
+import { useHistory } from "react-router-dom";
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
@@ -22,9 +28,14 @@ import useStyles from "./styles";
 import sally from "../../../images/sally.png";
 import logo from "../../../images/logo.png";
 import ellipse from "../../../images/ellipse.png";
+import * as api from "../../../api/index";
+import { AUTH } from "../../../constants/actionTypes";
+import { googleLogin } from "../../../actions/auth";
 
 const SignUp = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
     password: "",
@@ -44,10 +55,28 @@ const SignUp = () => {
     event.preventDefault();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(values);
+    // console.log(values);
+    try {
+      const { data } = await api.signup(values);
+      toast(data.message);
+    } catch (error) {
+      toast(error.response.data.message);
+    }
   };
+
+  const googleSuccess = async (res) => {
+    const token = res.tokenId;
+    try {
+      dispatch(googleLogin(token, history));
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
+  const googleError = () =>
+    console.log("Google Sign In was unsuccessful. Try again later");
 
   return (
     <Container className={classes.toplevel1}>
@@ -74,13 +103,19 @@ const SignUp = () => {
             >
               Create Account
             </Typography>
+            <GoogleLogin
+              clientId="390268815880-iesar9tq1omf7a47b3lhnrp5hf6bah1l.apps.googleusercontent.com"
+              onSuccess={googleSuccess}
+              onFailure={googleError}
+              cookiePolicy="single_host_origin"
+            />
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
               sx={{
                 px: 5,
-                mt: 3
+                mt: 3,
               }}
             >
               <TextField

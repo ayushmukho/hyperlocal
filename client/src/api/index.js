@@ -1,6 +1,14 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://fakestoreapi.com" });
+const API = axios.create({ baseURL: "http://localhost:5000/api" });
 
+/* @SIGNUP-API */
+export const signup = (formData) => API.post("/user/register", formData);
+export const googleLogin = (token) => API.post("/user/google_login", {tokenid: token});
 
+/* @PRODUCT-API */
 export const fetchProducts = () => API.get("/products");
+export const fetchSingleProduct = (id) => API.get(`/products/${id}`);
+
+/* @CART-API */
+export const addToCart = (id) => API.get("/");
