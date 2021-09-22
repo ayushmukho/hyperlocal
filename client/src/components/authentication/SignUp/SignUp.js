@@ -79,7 +79,8 @@ const SignUp = () => {
               noValidate
               onSubmit={handleSubmit}
               sx={{
-                px: 4,
+                px: 5,
+                mt: 3
               }}
             >
               <TextField
