@@ -2,33 +2,41 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    image: {
+    avatar: {
       type: String,
+      default: "https://ui-avatars.com/api/?name=John+Doe",
     },
     username: {
       type: String,
-      required: true,
+      required: [true, "Please enter your name"],
+      trim: true,
     },
     email: {
       type: String,
-      required: true,
+      required: [true, "Please enter your email"],
+      trim: true,
       unique: true,
     },
     password: {
       type: String,
-      required: true,
+      required: [true, "Please enter your password"],
     },
     isVerified: {
       type: Boolean,
       default: false,
     },
-    googleId: {
-      type: String,
-    },
-    provider: {
-      type: String,
-      required: true,
-    },
+    // googleId: {
+    //   type: String,
+    // },
+    // provider: {
+    //   type: String,
+    //   required: true,
+    // },
+    // role: {
+    //   type: number,
+    //   required: true,
+    //   default: 0,
+    // },
     isSeller: {
       type: Boolean,
       required: true,

@@ -1,8 +1,10 @@
 import { Router } from "express";
 import expressAsyncHandler from "express-async-handler";
 import {
+  activateEmail,
   applySeller,
   approveSeller,
+  getAccessToken,
   getAllApplication,
   getAllSellers,
   login,
@@ -22,11 +24,23 @@ userRouter
    */
   .post("/register", expressAsyncHandler(register))
   /**
+   * @desc activate account
+   * @route api/user/activation
+   * @access Public
+   */
+  .post("/activation", expressAsyncHandler(activateEmail))
+  /**
    * @desc login
-   * @router api/user/login
+   * @route api/user/login
    * @access Public
    */
   .post("/login", expressAsyncHandler(login))
+  /**
+   * @desc refreshtoken
+   * @route api/user/refresh_token
+   * @access Public
+   */
+  .post("/refresh_token", expressAsyncHandler(getAccessToken))
   /**
    * @desc get all sellers
    * @route api/user/seller/
