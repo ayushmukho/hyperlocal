@@ -45,6 +45,7 @@ export const register = async (req, res) => {
   //   username,
   //   email,
   //   password: hashedpwd,
+  //   avatar:`https://ui-avatars.com/api/?name=${username}`
   // });
   // res.status(200).json({ message: "User Created", data: newuser });
 
@@ -68,16 +69,17 @@ export const activateEmail = async (req, res) => {
   const { activation_token } = req.body;
   const user = jwt.verify(activation_token, vars.activationToken);
 
-  const { name, email, password } = user;
+  const { username, email, password } = user;
 
   const check = await User.findOne({ email });
   if (check)
     return res.status(400).json({ message: "This email already exists." });
 
   const newUser = new User({
-    name,
+    username,
     email,
     password,
+    avatar: `https://ui-avatars.com/api/?name=${username}`,
   });
 
   await newUser.save();
