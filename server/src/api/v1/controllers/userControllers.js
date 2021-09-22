@@ -9,6 +9,9 @@ import {
   createRefreshToken,
 } from "../helpers/createTokens.js";
 import { sendEmail } from "../helpers/sendMail.js";
+import { google } from "googleapis";
+const { OAuth2 } = google.auth;
+const client = new OAuth2(vars.googleClienId);
 
 /**
  * @desc register
@@ -114,6 +117,76 @@ export const login = async (req, res) => {
   res
     .status(200)
     .json({ message: "Success", data: { access_token: token, user: user } });
+};
+
+/**
+ * @desc google login
+ * @route api/user/google_login
+ * @access Public
+ */
+export const googleLogin = async (req, res) => {
+  const { tokenid } = req.body;
+  const verify = await client.verifyIdToken({
+    idToken: tokenid,
+    audience: vars.googleClienId,
+  });
+  const { email_verified, email, name, picture } = verify;
+
+  const password = email + vars.googleSecret;
+
+  if (email_verified) {
+    const user = await User.find({ email });
+
+    if (user) {
+      const isPassValid = await bcrypt.compare(password, user.password);
+      if (!isPassValid) {
+        res.status(422);
+        throw new Error("Wrong Password");
+      }
+
+      const token = createAccessToken({
+        userId: String(user._id),
+        iat: new Date().getTime(),
+      });
+
+      const refresh_token = createRefreshToken({ id: user._id });
+      res.cookie("refreshtoken", refresh_token, {
+        httpOnly: true,
+        path: "/user/refresh_token",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      });
+
+      res.status(200).json({
+        message: "Success",
+        data: { access_token: token, user: user },
+      });
+    } else {
+      const hashedpwd = await bcrypt.hash(password, 10);
+      const newUser = await User.create({
+        username: name,
+        avatar: picture,
+        email,
+        password: hashedpwd,
+      });
+
+      const token = createAccessToken({
+        userId: String(newUser._id),
+        iat: new Date().getTime(),
+      });
+
+      const refresh_token = createRefreshToken({ id: newUser._id });
+      res.cookie("refreshtoken", refresh_token, {
+        httpOnly: true,
+        path: "/user/refresh_token",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      });
+
+      res.status(200).json({
+        message: "Success",
+        data: { access_token: token, user: newUser },
+      });
+    }
+  }
 };
 
 /**

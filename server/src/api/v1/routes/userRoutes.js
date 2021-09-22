@@ -36,6 +36,12 @@ userRouter
    */
   .post("/login", expressAsyncHandler(login))
   /**
+   * @desc google login
+   * @route api/user/login
+   * @access Public
+   */
+  .post("/google_login", expressAsyncHandler(login))
+  /**
    * @desc refreshtoken
    * @route api/user/refresh_token
    * @access Public
