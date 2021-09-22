@@ -53,7 +53,7 @@ const SignUp = () => {
     <Container className={classes.toplevel1}>
       <Grid container className={classes.toplevel2}>
         <Grid item md={5} className={classes.sublevel1}>
-          <div class="photo" className={classes.hide}>
+          <div className={classes.hide}>
             <img alt="logo" className={classes.logo} src={logo} />
 
             <Typography className={classes.text}>
