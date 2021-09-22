@@ -8,6 +8,28 @@ export default makeStyles((theme) => ({
     height: "100%",
   },
 
+  hide: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+
+  boxExpand: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: 90,
+    marginLeft: 70,
+    marginRight: 70,
+    padding: 34,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 0,
+      marginLeft: 0,
+      marginRight: 0,
+      padding: 4,
+    },
+  },
+
   toplevel2: {
     borderRadius: "15px",
     backgroundColor: "#Fe8400",
@@ -19,6 +41,9 @@ export default makeStyles((theme) => ({
   sublevel2: {
     backgroundColor: "white",
     borderRadius: "30px 0px 0px  30px",
+    [theme.breakpoints.down("sm")]: {
+      borderRadius: "0px",
+    },
   },
 
   text: {
@@ -51,5 +76,14 @@ export default makeStyles((theme) => ({
     top: "79px",
     bottom: "9.1%",
     zIndex: 1,
+  },
+  submitButton: {
+    borderRadius: 10,
+    backgroundColor: "#Fe8400",
+    padding: "8px 16px",
+    fontSize: "15px",
+    color: "white",
+    fontWeight: 900,
+    marginTop: "36px",
   },
 }));
