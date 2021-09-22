@@ -128,6 +128,8 @@ export const login = async (req, res) => {
  */
 export const googleLogin = async (req, res) => {
   const { tokenid } = req.body;
+  console.log(tokenid);
+  console.log(vars.googleClienId);
   const verify = await client.verifyIdToken({
     idToken: tokenid,
     audience: vars.googleClienId,
@@ -189,9 +191,10 @@ export const googleLogin = async (req, res) => {
         data: { access_token: token, user: newUser },
       });
     }
+  } else {
+    res.status(402);
+    throw new Error("Email not verified");
   }
-  res.status(402);
-  throw new Error("Email not verified");
 };
 
 /**
