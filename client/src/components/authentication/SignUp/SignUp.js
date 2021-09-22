@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 
 import {
   Grid,
@@ -25,10 +25,11 @@ import ellipse from "../../../images/ellipse.png";
 
 const SignUp = () => {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
+  const [showPassword, setShowPassword] = useState(false);
+  const [values, setValues] = useState({
     password: "",
-    weightRange: "",
-    showPassword: false,
+    email: "",
+    username: "",
   });
 
   const handleChange = (prop) => (event) => {
@@ -36,10 +37,7 @@ const SignUp = () => {
   };
 
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -48,19 +46,14 @@ const SignUp = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log(values);
   };
 
   return (
     <Container className={classes.toplevel1}>
       <Grid container className={classes.toplevel2}>
-        <Grid item xs={5} className={classes.sublevel1}>
-          <div class="photo">
+        <Grid item md={5} className={classes.sublevel1}>
+          <div class="photo" className={classes.hide}>
             <img alt="logo" className={classes.logo} src={logo} />
 
             <Typography className={classes.text}>
@@ -72,24 +65,22 @@ const SignUp = () => {
           </div>
         </Grid>
 
-        <Grid item xs={7} className={classes.sublevel2}>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Typography component="h1" variant="h5">
+        <Grid item xs={12} md={7} className={classes.sublevel2}>
+          <Box className={classes.boxExpand}>
+            <Typography
+              component="h1"
+              variant="h5"
+              style={{ fontSize: "36px", fontWeight: 700 }}
+            >
               Create Account
             </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
+              sx={{
+                px: 4,
+              }}
             >
               <TextField
                 margin="normal"
@@ -98,6 +89,7 @@ const SignUp = () => {
                 id="fullname"
                 label="Full Name"
                 variant="standard"
+                onChange={handleChange("username")}
               />
               <TextField
                 margin="normal"
@@ -106,6 +98,7 @@ const SignUp = () => {
                 id="email"
                 label="Email"
                 variant="standard"
+                onChange={handleChange("email")}
               />
 
               <FormControl
@@ -117,7 +110,7 @@ const SignUp = () => {
                 <InputLabel htmlFor="adornment-password">Password</InputLabel>
                 <Input
                   id="adornment-password"
-                  type={values.showPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   value={values.password}
                   onChange={handleChange("password")}
                   endAdornment={
@@ -128,11 +121,7 @@ const SignUp = () => {
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -141,14 +130,14 @@ const SignUp = () => {
 
               <Button
                 type="submit"
-                color="primary"
+                className={classes.submitButton}
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Create Account
               </Button>
-              <Grid container>
+              <Grid container style={{ marginTop: "10px" }}>
                 <Grid item>
                   <Link href="#" variant="body2">
                     {"Already have an account?"}
