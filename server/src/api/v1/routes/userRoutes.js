@@ -47,7 +47,7 @@ userRouter
    * @route api/user/refresh_token
    * @access Public
    */
-  .post("/refresh_token", expressAsyncHandler(getAccessToken))
+  .get("/refresh_token", expressAsyncHandler(getAccessToken))
   /**
    * @desc get all sellers
    * @route api/user/seller/
@@ -65,17 +65,6 @@ userRouter
     expressAsyncHandler(applySeller)
   )
   /**
-   * @desc approve seller
-   * @router api/user/seller/approve/:id
-   * @access Admin
-   */
-  .post(
-    "/seller/approve/:id",
-    expressAsyncHandler(verifyToken),
-    expressAsyncHandler(isAdmin),
-    expressAsyncHandler(approveSeller)
-  )
-  /**
    * @desc get all applucation
    * @router api/user/seller/applications
    * @access Admin
@@ -87,11 +76,22 @@ userRouter
     expressAsyncHandler(getAllApplication)
   )
   /**
+   * @desc approve seller
+   * @router api/user/seller/approve/:id
+   * @access Admin
+   */
+  .get(
+    "/seller/approve/:id",
+    expressAsyncHandler(verifyToken),
+    expressAsyncHandler(isAdmin),
+    expressAsyncHandler(approveSeller)
+  )
+  /**
    * @desc reject seller
    * @router api/user/seller/reject/:id
    * @access Admin
    */
-  .post(
+  .get(
     "/seller/reject/:id",
     expressAsyncHandler(verifyToken),
     expressAsyncHandler(isAdmin),
@@ -102,8 +102,8 @@ userRouter
    * @router api/user/makeadmin/:id
    * @access Admin
    */
-  .post(
-    "/seller/makeadmin/:id",
+  .get(
+    "/makeadmin/:id",
     expressAsyncHandler(verifyToken),
     expressAsyncHandler(isAdmin),
     expressAsyncHandler(makeAdmin)

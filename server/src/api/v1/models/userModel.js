@@ -42,6 +42,18 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    shop: {
+      name: { type: String },
+      icon: {
+        type: String,
+        default: "https://ui-avatars.com/api/?name=John+Doe",
+      },
+      banner: {
+        type: String,
+        default:
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.TzjRVXFct2fZJCboYmxclAHaCP%26pid%3DApi&f=1",
+      },
+    },
     isAdmin: {
       type: Boolean,
       required: true,
