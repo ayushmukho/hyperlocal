@@ -2,6 +2,7 @@ import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import vars from "../../../config/vars.js";
 import Joi from "joi";
+import jwt from "jsonwebtoken";
 import SellerApplication from "../models/sellerApplicationModel.js";
 import {
   createAccessToken,
@@ -113,7 +114,7 @@ export const login = async (req, res) => {
   const refresh_token = createRefreshToken({ id: user._id });
   res.cookie("refreshtoken", refresh_token, {
     httpOnly: true,
-    path: "/user/refresh_token",
+    path: "/api/user/refresh_token",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
   res
@@ -158,7 +159,7 @@ export const googleLogin = async (req, res) => {
       const refresh_token = createRefreshToken({ id: user._id });
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
-        path: "/user/refresh_token",
+        path: "/api/user/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
@@ -183,7 +184,7 @@ export const googleLogin = async (req, res) => {
       const refresh_token = createRefreshToken({ id: newUser._id });
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
-        path: "/user/refresh_token",
+        path: "/api/user/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 

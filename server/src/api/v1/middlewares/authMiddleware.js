@@ -6,7 +6,7 @@ export const verifyToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token) {
-    jwt.verify(token, vars.jwtSecret, async (err, decodedToken) => {
+    jwt.verify(token, vars.accessToken, async (err, decodedToken) => {
       if (err) {
         res.status(422).json({ message: "Invalid Token" });
       } else {
