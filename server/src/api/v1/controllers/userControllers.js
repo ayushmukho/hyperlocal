@@ -56,7 +56,7 @@ export const register = async (req, res) => {
     email,
     password: hashedpwd,
   });
-  const activationUrl = `${vars.clientUrl}/user/activate/${activationToken}`;
+  const activationUrl = `${vars.clientUrl}/activate/${activationToken}`;
   sendEmail(email, activationUrl);
   res.status(200).json({ message: "Registered! Activation email sent" });
 };
