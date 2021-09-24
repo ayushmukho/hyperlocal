@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
   card: {
     maxWidth: 325,
-    margin: "auto",
+    // margin: "auto",
     borderRadius: 10,
     transition: "0.3s",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
     },
   },
   media: {
-    paddingTop: "100%",
+    paddingTop: "85%",
     margin: "20px",
     borderRadius: "50px",
   },
