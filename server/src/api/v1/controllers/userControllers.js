@@ -12,7 +12,7 @@ import {
 import { sendEmail } from "../helpers/sendMail.js";
 import { google } from "googleapis";
 const { OAuth2 } = google.auth;
-const client = new OAuth2(vars.googleClienId);
+const client = new OAuth2(vars.googleClientId);
 
 /**
  * @desc register
@@ -132,7 +132,7 @@ export const googleLogin = async (req, res) => {
 
   const verify = await client.verifyIdToken({
     idToken: tokenid,
-    audience: vars.googleClienId,
+    audience: vars.googleClientId,
   });
 
   const {
