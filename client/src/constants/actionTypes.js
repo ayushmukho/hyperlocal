@@ -4,9 +4,6 @@ export const END_LOADING = "END_LOADING";
 
 /* @AUTH-ACTIONS */
 export const AUTH = "AUTH";
-export const LOGIN_START="LOGIN_START";
-export const LOGIN_SUCCESS="LOGIN_SUCCESS";
-export const LOGIN_FAILED="LOGIN_FAILED";
 
 /* @PRODUCT-ACTIONS */
 export const FETCH_ALL_PRODUCTS = "FETCH_ALL_PRODUCTS";
@@ -16,4 +13,3 @@ export const FETCH_SINGLE_PRODUCT = "FETCH_SINGLE_PRODUCT";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const CART_RESET = "CART_RESET";
-

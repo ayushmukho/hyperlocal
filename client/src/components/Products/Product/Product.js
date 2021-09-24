@@ -7,6 +7,7 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
+import { Link } from "react-router-dom"
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import React from "react";
@@ -49,17 +50,19 @@ const Product = () => {
               <ShareIcon />
             </IconButton>
           </div>
-          <Button
-            style={{
-              borderRadius: 25,
-              backgroundColor: "#Fe8400",
-              padding: "8px 16px",
-              fontSize: "12px",
-            }}
-            variant="contained"
-          >
-            ADD TO CART
-          </Button>
+          <Link href="/cart">
+            <Button
+              style={{
+                borderRadius: 25,
+                backgroundColor: "#Fe8400",
+                padding: "8px 16px",
+                fontSize: "12px",
+              }}
+              variant="contained"
+            >
+              ADD TO CART
+            </Button>
+          </Link>
         </CardContent>
       </Card>
     </div>

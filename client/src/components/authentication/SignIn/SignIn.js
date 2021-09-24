@@ -11,9 +11,7 @@ import {
   InputAdornment,
   IconButton,
   Button,
-  Link,
 } from "@material-ui/core";
-import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
 
@@ -29,8 +27,8 @@ import sally from "../../../images/sally.png";
 import logo from "../../../images/logo.png";
 import ellipse from "../../../images/ellipse.png";
 
-
-import { googleLogin,login } from "../../../actions/auth";
+import { googleLogin, login } from "../../../actions/auth";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const classes = useStyles();
@@ -40,7 +38,6 @@ const SignIn = () => {
   const [values, setValues] = useState({
     password: "",
     email: "",
-
   });
 
   const handleChange = (prop) => (event) => {
@@ -57,7 +54,7 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-   dispatch(login(values,history))
+    dispatch(login(values, history));
   };
 
   const googleSuccess = async (res) => {
@@ -70,7 +67,7 @@ const SignIn = () => {
   };
 
   const googleError = () =>
-    console.log("Google Sign In was unsuccessful. Try again later");
+    toast("Google Sign In was unsuccessful. Try again later");
 
   return (
     <Container className={classes.toplevel1}>
@@ -112,7 +109,6 @@ const SignIn = () => {
                 mt: 3,
               }}
             >
-           
               <TextField
                 margin="normal"
                 required
@@ -157,8 +153,7 @@ const SignIn = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-             
-             Login
+                Login
               </Button>
             </Box>
           </Box>

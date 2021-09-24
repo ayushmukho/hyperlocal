@@ -1,4 +1,4 @@
-import { AUTH, LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS } from "../constants/actionTypes";
+import { AUTH } from "../constants/actionTypes";
 
 export const authReducer = (state = { authData: null }, action) => {
   switch (action.type) {

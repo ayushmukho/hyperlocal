@@ -11,7 +11,6 @@ import {
   InputAdornment,
   IconButton,
   Button,
-  Link,
 } from "@material-ui/core";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -19,7 +18,7 @@ import { GoogleLogin } from "react-google-login";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
@@ -29,7 +28,6 @@ import sally from "../../../images/sally.png";
 import logo from "../../../images/logo.png";
 import ellipse from "../../../images/ellipse.png";
 import * as api from "../../../api/index";
-import { AUTH } from "../../../constants/actionTypes";
 import { googleLogin } from "../../../actions/auth";
 
 const SignUp = () => {
@@ -57,7 +55,6 @@ const SignUp = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log(values);
     try {
       const { data } = await api.signup(values);
       toast(data.message);
@@ -76,7 +73,7 @@ const SignUp = () => {
   };
 
   const googleError = () =>
-    console.log("Google Sign In was unsuccessful. Try again later");
+    toast("Google Sign In was unsuccessful. Try again later");
 
   return (
     <Container className={classes.toplevel1}>
@@ -175,7 +172,7 @@ const SignUp = () => {
               </Button>
               <Grid container style={{ marginTop: "10px" }}>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link to="/login" style={{ textDecoration: "none" }}>
                     {"Already have an account?"}
                   </Link>
                 </Grid>
