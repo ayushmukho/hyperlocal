@@ -2,10 +2,17 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   toplevel1: {
-    marginTop: "10%",
+    marginTop: "70px",
     display: "flex",
+
     justifyContent: "center",
-    height: "100%",
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "10px",
+      height: "90%",
+      // paddingRight: "20px"
+    },
   },
 
   hide: {
@@ -44,6 +51,15 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       borderRadius: "0px",
     },
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      height: "100%",
+      paddingBottom: "30px",
+      paddingTop:"0px",
+      
+
+      // paddingRight: "20px"
+    },
   },
 
   text: {
@@ -54,6 +70,13 @@ export default makeStyles((theme) => ({
     color: "#FFFFFF",
     fontSize: "36px",
     inlineHeight: "36px",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      paddingRight: "50px",
+      color: "#FFFFFF",
+      fontSize: "30px",
+      inlineHeight: "36px",
+    },
   },
 
   logo: {
@@ -68,6 +91,16 @@ export default makeStyles((theme) => ({
     left: "25.74%",
     right: "25.74%",
     // top: "70px",
+    top: "6px",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      left: "19.74%",
+      right: "25.74%",
+      top: "-24px",
+      bottom: "0px",
+      zIndex: 1,
+      width: "500px",
+    },
   },
   sally: {
     position: "relative",
@@ -76,6 +109,16 @@ export default makeStyles((theme) => ({
     top: "79px",
     bottom: "9.1%",
     zIndex: 1,
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+
+      left: "19.74%",
+      right: "25.74%",
+      top: "29px",
+      bottom: "0px",
+      width: "400px",
+      zIndex: 1,
+    },
   },
   submitButton: {
     borderRadius: 10,
@@ -85,5 +128,17 @@ export default makeStyles((theme) => ({
     color: "white",
     fontWeight: 900,
     marginTop: "36px",
+  },
+  googleImage: {
+    height: "30px",
+    paddingTop: "5px",
+    marginRight: "10px",
+  },
+  googleButton: {
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "white",
+    height: "50px",
+    marginTop: "20px",
   },
 }));
