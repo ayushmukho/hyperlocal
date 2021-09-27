@@ -8,6 +8,7 @@ import {
   getAccessToken,
   getAllApplication,
   getAllSellers,
+  getUserInfo,
   googleLogin,
   login,
   makeAdmin,
@@ -62,6 +63,12 @@ userRouter
    * @access Public
    */
   .post("/reset", expressAsyncHandler(resetPassword))
+  /**
+   * @desc get user information
+   * @router api/user/info
+   * @access Private
+   */
+  .get("/info", verifyToken, getUserInfo)
   /**
    * @desc get all sellers
    * @route api/user/seller/
