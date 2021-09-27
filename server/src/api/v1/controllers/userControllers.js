@@ -213,11 +213,11 @@ export const getAccessToken = async (req, res) => {
     res.status(400);
     throw new Error("Please Login!");
   }
-  jwt.verify(refreshtoken, vars.refreshToken, async (err, { id }) => {
+  jwt.verify(refreshtoken, vars.refreshToken, async (err, decodedToken) => {
     if (err) {
       res.status(400).json({ message: "please Login" });
     }
-    const user = await User.findById(id);
+    const user = await User.findById(decodedToken.id);
     const token = createAccessToken({
       userId: String(user._id),
       iat: new Date().getTime(),
@@ -309,7 +309,7 @@ export const makeAdmin = async (req, res) => {
 /**
  * @desc forgot password
  * @router api/user/forgot
- * @access Private
+ * @access Public
  */
 export const forgotPassword = async (req, res) => {
   const { email } = req.body;
@@ -328,16 +328,16 @@ export const forgotPassword = async (req, res) => {
 /**
  * @desc reset password
  * @router api/user/reset
- * @access Private
+ * @access Public
  */
 export const resetPassword = async (req, res) => {
   const { password, access_token } = req.body;
 
   const passwordHash = await bcrypt.hash(password, 12);
-  jwt.verify(access_token, vars.accessToken, async (err, { id }) => {
+  jwt.verify(access_token, vars.accessToken, async (err, decodedToken) => {
     if (err) res.status(401).json({ message: "Wrong access token" });
     await User.findOneAndUpdate(
-      { _id: id },
+      { _id: decodedToken.id },
       {
         password: passwordHash,
       }
