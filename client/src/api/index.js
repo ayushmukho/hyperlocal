@@ -4,6 +4,7 @@ const API = axios.create({ baseURL: "http://localhost:5000/api" });
 
 /* @ACTIVATION-API */
 export const activation=(id)=>API.post("/user/activation",{activation_token:id})
+export const userByAccessToken=(access_token)=>API.get("/user/info", { headers: { Authorization: `Bearer ${access_token}` } })
 
 /* @SIGNUP-API */
 export const signup = (formData) => API.post("/user/register", formData);
