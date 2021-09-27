@@ -57,7 +57,7 @@ export const register = async (req, res) => {
     password: hashedpwd,
   });
   const activationUrl = `${vars.clientUrl}/activate/${activationToken}`;
-  sendEmail(email, activationUrl);
+  sendEmail(email, activationUrl, "Verify Mail");
   res.status(200).json({ message: "Registered! Activation email sent" });
 };
 
@@ -85,7 +85,10 @@ export const activateEmail = async (req, res) => {
 
   await newUser.save();
 
-  res.json({ message: "Account has been activated!" });
+  res.json({
+    message:
+      "You have successfully registered your account.Please click below to Sign In",
+  });
 };
 
 /**
@@ -301,4 +304,45 @@ export const makeAdmin = async (req, res) => {
     }
   );
   res.status(200).json({ message: `User made admin`, data: null });
+};
+
+/**
+ * @desc forgot password
+ * @router api/user/forgot
+ * @access Private
+ */
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email: email });
+  if (!user) {
+    res.status(422);
+    throw new Error("Account with this email doesn't exists");
+  }
+  const access_token = createAccessToken({ id: user._id });
+  const url = `${vars.clientUrl}/user/reset/${access_token}`;
+
+  sendEmail(email, url, "Reset your password");
+  res.json({ message: "Password reset link send, please check your email." });
+};
+
+/**
+ * @desc reset password
+ * @router api/user/reset
+ * @access Private
+ */
+export const resetPassword = async (req, res) => {
+  const { password, access_token } = req.body;
+
+  const passwordHash = await bcrypt.hash(password, 12);
+  jwt.verify(access_token, vars.accessToken, async (err, { id }) => {
+    if (err) res.status(401).json({ message: "Wrong access token" });
+    await User.findOneAndUpdate(
+      { _id: id },
+      {
+        password: passwordHash,
+      }
+    );
+  });
+
+  res.json({ message: "Password successfully changed!" });
 };

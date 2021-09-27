@@ -45,5 +45,6 @@ export default {
    */
   googleClientId: process.env.AUTH_SERVICE_CLIENT_ID,
   mailingClientId: process.env.MAILING_SERVICE_CLIENT_ID,
-  mailingSecret: process.env.GOOGLE_SECRET,
+  mailingSecret: process.env.MAILING_SERVICE_CLIENT_SECRET,
+  googleSecret: process.env.GOOGLE_SECRET,
 };

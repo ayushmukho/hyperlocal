@@ -4,6 +4,7 @@ import {
   activateEmail,
   applySeller,
   approveSeller,
+  forgotPassword,
   getAccessToken,
   getAllApplication,
   getAllSellers,
@@ -12,6 +13,7 @@ import {
   makeAdmin,
   register,
   rejectSeller,
+  resetPassword,
 } from "../controllers/userControllers.js";
 import { isAdmin, verifyToken } from "../middlewares/authMiddleware.js";
 
@@ -48,6 +50,18 @@ userRouter
    * @access Public
    */
   .get("/refresh_token", expressAsyncHandler(getAccessToken))
+  /**
+   * @desc forgot password
+   * @router api/user/forgot
+   * @access Public
+   */
+  .post("/forgot", expressAsyncHandler(forgotPassword))
+  /**
+   * @desc reset password
+   * @router api/user/reset
+   * @access Public
+   */
+  .post("/reset", expressAsyncHandler(resetPassword))
   /**
    * @desc get all sellers
    * @route api/user/seller/
