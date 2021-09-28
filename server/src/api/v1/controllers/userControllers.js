@@ -29,13 +29,13 @@ export const register = async (req, res) => {
     password: Joi.string().min(8).alphanum().required(),
   }).validate(req.body, { abortEarly: false, allowUnknown: true });
   if (validation.error) {
-    res.status(422);
+    res.status(400);
     throw new Error(validation.error);
   }
 
   const user = await User.findOne({ email: email });
   if (user) {
-    res.status(422);
+    res.status(409);
     throw new Error("Account with this email already exists");
   }
 
@@ -74,7 +74,7 @@ export const activateEmail = async (req, res) => {
 
   const check = await User.findOne({ email });
   if (check)
-    return res.status(400).json({ message: "This email already exists." });
+    return res.status(409).json({ message: "This email already exists." });
 
   const newUser = new User({
     username,
@@ -100,13 +100,13 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
   if (!user) {
-    res.status(422);
+    res.status(401);
     throw new Error("Wrong Email");
   }
 
   const isPassValid = await bcrypt.compare(password, user.password);
   if (!isPassValid) {
-    res.status(422);
+    res.status(401);
     throw new Error("Wrong Password");
   }
   const token = createAccessToken({
@@ -150,7 +150,7 @@ export const googleLogin = async (req, res) => {
     if (user) {
       const isPassValid = await bcrypt.compare(password, user.password);
       if (!isPassValid) {
-        res.status(422);
+        res.status(401);
         throw new Error("Wrong Password");
       }
 
@@ -197,7 +197,7 @@ export const googleLogin = async (req, res) => {
       });
     }
   } else {
-    res.status(402);
+    res.status(403);
     throw new Error("Email not verified");
   }
 };
@@ -210,12 +210,12 @@ export const googleLogin = async (req, res) => {
 export const getAccessToken = async (req, res) => {
   const { refreshtoken } = req.cookies;
   if (!refreshtoken) {
-    res.status(400);
+    res.status(401);
     throw new Error("Please Login!");
   }
   jwt.verify(refreshtoken, vars.refreshToken, async (err, decodedToken) => {
     if (err) {
-      res.status(400).json({ message: "please Login" });
+      res.status(401).json({ message: "please Login" });
     }
     const user = await User.findById(decodedToken.id);
     const token = createAccessToken({
@@ -315,7 +315,7 @@ export const forgotPassword = async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email: email });
   if (!user) {
-    res.status(422);
+    res.status(404);
     throw new Error("Account with this email doesn't exists");
   }
   const access_token = createAccessToken({ id: user._id });
