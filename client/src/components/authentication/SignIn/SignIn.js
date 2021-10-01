@@ -63,7 +63,7 @@ const SignIn = () => {
     try {
       dispatch(googleLogin(token, history));
     } catch (error) {
-      console.log(error.response.data);
+      toast(error.response.data.message);
     }
   };
 
