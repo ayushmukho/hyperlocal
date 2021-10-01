@@ -1,5 +1,5 @@
-import SellerApplication from "../models/sellerApplicationModel";
-import User from "../models/userModel";
+import SellerApplication from "../models/sellerApplicationModel.js";
+import User from "../models/userModel.js";
 
 /**
  * @desc get all applucation

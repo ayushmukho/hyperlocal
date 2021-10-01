@@ -16,7 +16,7 @@ const client = new OAuth2(vars.googleClientId);
 
 /**
  * @desc register
- * @route api/user/register
+ * @route api/auth/register
  * @access Public
  */
 export const register = async (req, res) => {
@@ -63,7 +63,7 @@ export const register = async (req, res) => {
 
 /**
  * @desc activate email
- * @route api/user/activation
+ * @route api/auth/activation
  * @access Public
  */
 export const activateEmail = async (req, res) => {
@@ -93,7 +93,7 @@ export const activateEmail = async (req, res) => {
 
 /**
  * @desc login
- * @route api/user/login
+ * @route api/auth/login
  * @access Public
  */
 export const login = async (req, res) => {
@@ -117,7 +117,7 @@ export const login = async (req, res) => {
   const refresh_token = createRefreshToken({ id: user._id });
   res.cookie("refreshtoken", refresh_token, {
     httpOnly: true,
-    path: "/api/user/refresh_token",
+    path: "/api/auth/refresh_token",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
   res
@@ -127,7 +127,7 @@ export const login = async (req, res) => {
 
 /**
  * @desc google login
- * @route api/user/google_login
+ * @route api/auth/google_login
  * @access Public
  */
 export const googleLogin = async (req, res) => {
@@ -162,7 +162,7 @@ export const googleLogin = async (req, res) => {
       const refresh_token = createRefreshToken({ id: user._id });
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
-        path: "/api/user/refresh_token",
+        path: "/api/auth/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
@@ -204,7 +204,7 @@ export const googleLogin = async (req, res) => {
 
 /**
  * @desc get all sellers
- * @route api/user/seller/
+ * @route api/auth/refresh_token/
  * @access Public
  */
 export const getAccessToken = async (req, res) => {
@@ -230,7 +230,7 @@ export const getAccessToken = async (req, res) => {
 
 /**
  * @desc forgot password
- * @router api/user/forgot
+ * @router api/auth/forgot
  * @access Public
  */
 export const forgotPassword = async (req, res) => {
@@ -249,7 +249,7 @@ export const forgotPassword = async (req, res) => {
 
 /**
  * @desc reset password
- * @router api/user/reset
+ * @router api/auth/reset
  * @access Public
  */
 export const resetPassword = async (req, res) => {
@@ -257,14 +257,15 @@ export const resetPassword = async (req, res) => {
 
   const passwordHash = await bcrypt.hash(password, 12);
   jwt.verify(access_token, vars.accessToken, async (err, decodedToken) => {
-    if (err) res.status(401).json({ message: "Wrong access token" });
+    if (err) {
+      return res.status(401).json({ message: "Wrong access token" });
+    }
     await User.findOneAndUpdate(
       { _id: decodedToken.id },
       {
         password: passwordHash,
       }
     );
+    res.json({ message: "Password successfully changed!" });
   });
-
-  res.json({ message: "Password successfully changed!" });
 };
