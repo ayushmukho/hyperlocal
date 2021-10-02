@@ -56,7 +56,7 @@ export const register = async (req, res) => {
     email,
     password: hashedpwd,
   });
-  const activationUrl = `${vars.clientUrl}/activate/${activationToken}`;
+  const activationUrl = `${vars.clientUrl}/user/activate/${activationToken}`;
   sendEmail(email, activationUrl, "Verify Mail");
   res.status(200).json({ message: "Registered! Activation email sent" });
 };
@@ -187,7 +187,7 @@ export const googleLogin = async (req, res) => {
       const refresh_token = createRefreshToken({ id: newUser._id });
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
-        path: "/api/user/refresh_token",
+        path: "/api/auth/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
