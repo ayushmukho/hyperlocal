@@ -5,6 +5,7 @@ import SignIn from "./components/authentication/SignIn/SignIn";
 import SignUp from "./components/authentication/SignUp/SignUp";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Activation from "./components/authentication/Activation";
+import LandingPage from "./components/LandingPage"
 
 const App = () => {
   const parcel = useSelector((state) => state.user);
@@ -15,7 +16,7 @@ const App = () => {
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact />
+          <Route path="/" exact component={LandingPage} />
           <Route path="/register" exact component={SignUp} />
           <Route path="/activate/:id" exact component={Activation} />
           <Route path="/login" exact component={SignIn} />
