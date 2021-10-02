@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { userByAccessToken } from "./actions/auth";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./pages/Profile/Profile";
+import Products from "./components/Products/Products";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/register" exact component={SignUp} />
           <Route path="/user/activate/:id" exact component={Activation} />
           <Route path="/login" exact component={SignIn} />
+          <Route path="/products" exact component={Products} />
         </Switch>
         <ToastContainer />
       </BrowserRouter>
