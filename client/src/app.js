@@ -11,14 +11,14 @@ import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./pages/Profile/Profile";
 
 const App = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const access_token = localStorage.getItem("access_token");
 
   useEffect(() => {
-    if(access_token){
-      dispatch(userByAccessToken(access_token))
+    if (access_token) {
+      dispatch(userByAccessToken(access_token));
     }
-  }, [access_token, dispatch])
+  }, [access_token, dispatch]);
 
   return (
     <>
@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/" exact />
           <PrivateRoute path="/user/profile" exact component={Profile} />
           <Route path="/register" exact component={SignUp} />
-          <Route path="/activate/:id" exact component={Activation} />
+          <Route path="/user/activate/:id" exact component={Activation} />
           <Route path="/login" exact component={SignIn} />
         </Switch>
         <ToastContainer />
