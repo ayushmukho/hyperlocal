@@ -4,6 +4,7 @@ export const END_LOADING = "END_LOADING";
 
 /* @AUTH-ACTIONS */
 export const AUTH = "AUTH";
+export const GET_USER_BY_ACCESS_TOKEN = "GET_USER_BY_ACCESS_TOKEN";
 
 /* @PRODUCT-ACTIONS */
 export const FETCH_ALL_PRODUCTS = "FETCH_ALL_PRODUCTS";

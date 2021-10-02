@@ -8,7 +8,7 @@ export const verifyToken = (req, res, next) => {
   if (token) {
     jwt.verify(token, vars.accessToken, async (err, decodedToken) => {
       if (err) {
-        res.status(422).json({ message: "Invalid Token" });
+        res.status(401).json({ message: "Invalid Token" });
       } else {
         const user = await User.findById(decodedToken.userId);
         req.user = user;
@@ -16,14 +16,14 @@ export const verifyToken = (req, res, next) => {
       }
     });
   } else {
-    res.status(422);
+    res.status(401);
     throw new Error("Access Denied");
   }
 };
 
 export const isAdmin = (req, res, next) => {
   if (!req.user.isAdmin) {
-    res.status(422);
+    res.status(401);
     throw new Error("Admin resources, Access Denied");
   }
   next();
@@ -31,7 +31,7 @@ export const isAdmin = (req, res, next) => {
 
 export const isSeller = (req, res, next) => {
   if (!req.user.isSeller) {
-    res.status(422);
+    res.status(401);
     throw new Error("Seller resources, Access Denied");
   }
   next();
