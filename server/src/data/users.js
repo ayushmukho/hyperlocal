@@ -17,7 +17,7 @@ const users = [
   },
   {
     username: "Mukho jod",
-    email: "john@example.com",
+    email: "randi@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
@@ -26,7 +26,7 @@ const users = [
   },
   {
     username: "Khushi Yadav",
-    email: "john@example.com",
+    email: "khus@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
@@ -35,7 +35,7 @@ const users = [
   },
   {
     username: "Sandeepan Das",
-    email: "john@example.com",
+    email: "sand@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
@@ -44,7 +44,7 @@ const users = [
   },
   {
     username: "Shuhaib Bahu Ali",
-    email: "john@example.com",
+    email: "shu@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
@@ -53,7 +53,7 @@ const users = [
   },
   {
     username: "Peedee",
-    email: "john@example.com",
+    email: "pede@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
@@ -62,7 +62,7 @@ const users = [
   },
   {
     username: "Nhk",
-    email: "john@example.com",
+    email: "nhk@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
@@ -71,7 +71,7 @@ const users = [
   },
   {
     username: "Anuj Kumar",
-    email: "john@example.com",
+    email: "anu@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
@@ -80,7 +80,7 @@ const users = [
   },
   {
     username: "Simran Saha",
-    email: "john@example.com",
+    email: "simran@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
@@ -89,7 +89,7 @@ const users = [
   },
   {
     username: "Sonali jaiswal",
-    email: "john@example.com",
+    email: "sonali@example.com",
     password: bcrypt.hashSync("123456", 10),
     isSeller: true,
     shop: {
