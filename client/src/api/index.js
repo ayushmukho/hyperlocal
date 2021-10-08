@@ -3,15 +3,15 @@ import axios from "axios";
 const API = axios.create({ baseURL: "http://localhost:5000/api" });
 
 /* @ACTIVATION-API */
-export const activation=(id)=>API.post("/user/activation",{activation_token:id})
+export const activation=(id)=>API.post("/auth/activation",{activation_token:id})
 export const userByAccessToken=(access_token)=>API.get("/user/info", { headers: { Authorization: `Bearer ${access_token}` } })
 
 /* @SIGNUP-API */
-export const signup = (formData) => API.post("/user/register", formData);
-export const googleLogin = (token) => API.post("/user/google_login", {tokenid: token});
+export const signup = (formData) => API.post("/auth/register", formData);
+export const googleLogin = (token) => API.post("/auth/google_login", {tokenid: token});
 
 /* @SIGNIN-API */
-export const signIn = (formData) => API.post("/user/login", formData);
+export const signIn = (formData) => API.post("/auth/login", formData);
 
 /* @PRODUCT-API */
 export const fetchProducts = () => API.get("/products");
