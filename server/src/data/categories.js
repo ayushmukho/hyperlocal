@@ -8,5 +8,17 @@ const categories = [
     image: "/images/airpods.jpg",
     description: "Electronics applicances",
   },
+  {
+    admin: new ObjectID("614ff307cc06fd71f6943615"),
+    name: "Stationary",
+    image: "/images/airpods.jpg",
+    description: "Pens and pencils",
+  },
+  {
+    admin: new ObjectID("614ff307cc06fd71f6943615"),
+    name: "Groceries",
+    image: "/images/airpods.jpg",
+    description: "Fresh Groceries",
+  },
 ];
 export default categories;
