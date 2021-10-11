@@ -9,7 +9,9 @@ export default makeStyles((theme) => ({
     transition: '0.3s',
     boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
     '&:hover': {
-      boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.6)',
+      filter: `drop-shadow(0 0 0.25rem #ebc3ea)`,
+      transform: 'scale(1.05)',
+      transitionDuration: '1s',
     },
     [theme.breakpoints.down('md')]: {
       marginBottom: '70px',
