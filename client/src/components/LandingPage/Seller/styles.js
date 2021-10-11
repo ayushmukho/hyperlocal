@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   card: {
-    maxWidth: 250,
+    maxWidth: 200,
+    maxHeight: 200,
     margin: 'auto',
     borderRadius: '30px 30px 20px 20px',
     transition: '0.3s',
@@ -10,17 +11,20 @@ export default makeStyles((theme) => ({
     '&:hover': {
       boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.6)',
     },
+    [theme.breakpoints.down('md')]: {
+      marginBottom: '70px',
+    },
   },
   media: {
-    paddingTop: '100%',
+    paddingTop: '65%',
     borderRadius: '30px',
   },
   content: {
     textAlign: 'center',
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
   },
   divider: {
-    margin: `${theme.spacing.unit * 1}px 0`,
+    margin: `${theme.spacing(1)}px 0`,
   },
   heading: {
     fontWeight: 'bold',
@@ -32,7 +36,7 @@ export default makeStyles((theme) => ({
     display: 'inline-block',
     border: '2px solid white',
     '&:not(:first-of-type)': {
-      marginLeft: -theme.spacing.unit,
+      marginLeft: -theme.spacing(1),
     },
   },
   mid: {

@@ -167,13 +167,13 @@ const Navbar = () => {
         </NavLink>
         <Bars />
         <NavMenu>
-          <NavLink to='/about' activeStyle>
+          <NavLink to='/about'>
             About
           </NavLink>
-          <NavLink to='/services' activeStyle>
+          <NavLink to='/services'>
             Services
           </NavLink>
-          <NavLink to='/contact-us' activeStyle>
+          <NavLink to='/contact-us'>
             Contact Us
           </NavLink>
         </NavMenu>

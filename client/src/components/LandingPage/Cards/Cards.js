@@ -4,11 +4,15 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { useHistory } from 'react-router-dom'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   card: {
     boxShadow: (props) => `0px 5px 1px 1px ${props.color}`,
     marginBottom: '40px',
     cursor: 'pointer',
+    minWidth: 200,
+    [theme.breakpoints.down('md')]: {
+      minWidth: 250,
+    },
     '&:hover': {
       backgroundColor: (props) => `0px 5px 1px 1px ${props.color}`,
       transform: 'scale(1.05)',
@@ -28,7 +32,7 @@ const useStyles = makeStyles({
   header: {
     marginleft: '00px',
   },
-})
+}))
 
 export default function Cards(props) {
   const classes = useStyles(props)

@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     marginLeft: '50px',
   },
 })
-  export default function Index() {
+export default function Index() {
   const categoriesData = useSelector((state) => state.getAllCategories)
   const { categories } = categoriesData
   const sellersData = useSelector((state) => state.getAllSellers)
@@ -40,10 +40,10 @@ const useStyles = makeStyles({
     '#f1e1f8',
     '#e7e3fe',
   ]
-  const sellersPerPage = 3
+  const sellersPerPage = 4
   let arrayForHoldingSellers = []
   const [sellersToShow, setSellersToShow] = useState([])
-  const [next, setNext] = useState(3)
+  const [next, setNext] = useState(4)
 
   const loopWithSlice = (start, end) => {
     const slicedSellers = sellers.slice(start, end)
@@ -57,15 +57,12 @@ const useStyles = makeStyles({
   }, [sellers])
 
   const handleShowMoreSellers = () => {
-    if (sellersToShow.length<3) {
+    if (sellersToShow.length < 4) {
       loopWithSlice(0, 0 + sellersPerPage)
       setNext(0 + sellersPerPage)
-      console.log(sellersToShow)
-    }
-    else{
+    } else {
       loopWithSlice(next, next + sellersPerPage)
       setNext(next + sellersPerPage)
-      console.log(sellersToShow)
     }
   }
   return (
@@ -87,7 +84,18 @@ const useStyles = makeStyles({
       <div className='cc'>
         <Grid container spacing={1}>
           {categories.map((category, i) => (
-            <Grid item xs={3}>
+            <Grid
+              item
+              lg={3}
+              md={6}
+              xs={12}
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                display: 'flex',
+              }}
+              key={i}
+            >
               <Cards
                 name={category.name}
                 img={category.image}
@@ -112,13 +120,13 @@ const useStyles = makeStyles({
       </Typography>
       <Grid container spacing={1}>
         {sellersToShow.map((seller, i) => (
-          <Grid item xs={4}>
-            <SellerCard name={seller.shop.name} img={seller.shop.banner} />
+          <Grid item lg={3} md={6} xs={12} key={i}>
+            <SellerCard name={seller.shop.name} img={seller.shop.icon} />
           </Grid>
         ))}
       </Grid>
 
-      <button class='button' onClick={handleShowMoreSellers}>
+      <button className='button' onClick={handleShowMoreSellers}>
         <span>Show More </span>
       </button>
 
