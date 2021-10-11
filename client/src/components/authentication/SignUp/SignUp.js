@@ -23,7 +23,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 import { Visibility, VisibilityOff } from '@material-ui/icons'
 
-import useStyles from './styles'
+import useStyles from '../../LandingPage/Navbar/styles'
 
 import sally from '../../../images/sally.png'
 import logo from '../../../images/logo.png'

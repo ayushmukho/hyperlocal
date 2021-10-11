@@ -1,76 +1,61 @@
-import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import Link from '@material-ui/core/Link'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 280,
-    top: '50%',
-    left: '50%',
-    borderRadius: 10,
-    transform: 'translate(48%, 50%)',
-    position: 'static',
-    backgroundSize: '200%',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    transition: '1s',
-    backgroundImage: 'linear-gradient(45deg, #FFC312, #EE5A24, #7417a3)',
-    '&:hover': {
-      backgroundPosition: 'right',
-    },
+    boxShadow: (props) => `0px 5px 1px 1px ${props.color}`,
     marginBottom: '40px',
-    marginRight: '80px',
-    justifyContent: 'space-around',
     cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: (props) => `0px 5px 1px 1px ${props.color}`,
+      transform: 'scale(1.05)',
+      color: 'black',
+      transitionProperty: 'transform, backgroundColor',
+      transitionDuration: '1s',
+    },
+    backgroundColor: (props) => props.color,
+    maxHeight: '70px',
+    borderRadius: '20px',
+    paddingBottom: '100px',
+    maxWidth: '200px',
+    marginLeft: '50px',
+    filter: `drop-shadow(0 0 0.25rem #ebc3ea)`,
   },
 
-  cc: {
-    display: 'inline-block',
+  header: {
+    marginleft: '00px',
   },
 })
 
-export default function Cards() {
-  const classes = useStyles()
-
+export default function Cards(props) {
+  const classes = useStyles(props)
   const Default = () => (
-    <>
-      <CardContent>
-        <Typography gutterBottom variant='h5' component='h2'>
-          Default
-        </Typography>
-        <Typography variant='body2' color='textSecondary' component='p'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Typography>
-      </CardContent>
-    </>
+    <CardContent>
+      <Typography
+        gutterBottom
+        variant='h5'
+        component='h2'
+        className={classes.header}
+      >
+        {props.name}
+      </Typography>
+      <Typography variant='body2' color='textSecondary' component='p'>
+        {props.description}
+      </Typography>
+    </CardContent>
   )
 
-  const Redirect = () => (
-    <>
-      <Link href='/signup' className='btn btn-primary'>
-        Sign up
-      </Link>
-    </>
-  )
+  const component = <Default />
 
-  const [component, setComponent] = useState(<Default />)
-
-  const handleClick = (c) => {
-    switch (c) {
-      case 'Redirect':
-        setComponent(<Redirect />)
-        break
-      default:
-        break
-    }
-  }
+  const history = useHistory()
+  const navigateTo = () => history.push(`/categories/${props.name}`)
 
   return (
-    <div className={classes.cc}>
-      <Card className={classes.card} onClick={() => handleClick('Redirect')} >
+    <div>
+      <Card onClick={navigateTo} className={classes.card}>
         {component}
       </Card>
     </div>

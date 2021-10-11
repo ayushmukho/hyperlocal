@@ -11,7 +11,9 @@ import { userByAccessToken } from "./actions/auth";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./pages/Profile/Profile";
 import Products from "./components/Products/Products";
-
+import { getSellers } from "./actions/sellers";
+import { getCategories } from "./actions/categories";
+import './app.css';
 const App = () => {
   const dispatch = useDispatch();
   const access_token = localStorage.getItem("access_token");
@@ -21,6 +23,13 @@ const App = () => {
       dispatch(userByAccessToken(access_token));
     }
   }, [access_token, dispatch]);
+
+  useEffect(() => {
+    dispatch(getSellers())
+    dispatch(getCategories())
+  }, [dispatch])
+
+
 
   return (
     <>

@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   min-height: 20vh;
-  padding-top:20px;
-  padding-bottom:5px;
-  background: radial-gradient(circle, gold, #fe8400);
+  padding-top: 20px;
+  padding-bottom: 5px;
+  background: linear-gradient(grey, #688dfc);
   justify-content: center;
 `
 
@@ -65,7 +65,7 @@ const Icon = styled.i`
 export default class Footer extends Component {
   render() {
     return (
-      <Container>
+      <Container className='foo'>
         <Wrapper>
           <Row>
             <Column>

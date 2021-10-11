@@ -78,7 +78,7 @@ export const VectorEight = styled.img`
   width: 101.58%;
   height: 96.14%;
   position: absolute;
-  right: -33px;
+  right: -55px;
   top: -57px;
 `
 export const FlexWrapperOne = styled.div`
