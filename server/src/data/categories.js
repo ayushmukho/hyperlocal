@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-const { mongo } = mongoose;
-const ObjectID = mongo.ObjectId;
+import mongoose from 'mongoose'
+const { mongo } = mongoose
+const ObjectID = mongo.ObjectId
 const categories = [
   {
     admin: new ObjectID('614ff307cc06fd71f6943615'),
@@ -26,5 +26,12 @@ const categories = [
     image: '/images/airpods.jpg',
     description: 'Hardware Tools for machinery',
   },
+  {
+    admin: new ObjectID('614ff307cc06fd71f6943615'),
+    name: 'Services',
+    image: '/images/airpods.jpg',
+    description: 'Services',
+  },
 ]
-export default categories;
+
+export default categories
