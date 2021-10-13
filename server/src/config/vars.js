@@ -10,6 +10,12 @@ export default {
   port: parseInt(process.env.PORT) || 5050,
 
   /**
+   * Base urls
+   */
+  baseUrl: process.env.APP_BASE_URL,
+  clientUrl: process.env.CLIENT_URL,
+
+  /**
    * Database the app should connect to
    */
   databaseURL: process.env.MONGODB_URI,
@@ -17,7 +23,9 @@ export default {
   /**
    * The secret sauce to validate JWT
    */
-  jwtSecret: process.env.JWT_SECRET,
+  accessToken: process.env.ACCESS_TOKEN_SECRET,
+  refreshToken: process.env.REFRESH_TOKEN_SECRET,
+  activationToken: process.env.ACTIVATION_TOKEN_SECRET,
 
   /**
    * Used by Winston logger
@@ -32,4 +40,11 @@ export default {
   api: {
     prefix: "/api",
   },
+  /**
+   * google
+   */
+  googleClientId: process.env.AUTH_SERVICE_CLIENT_ID,
+  mailingClientId: process.env.MAILING_SERVICE_CLIENT_ID,
+  mailingSecret: process.env.MAILING_SERVICE_CLIENT_SECRET,
+  googleSecret: process.env.GOOGLE_SECRET,
 };
