@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FaBars } from "react-icons/fa";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
@@ -15,13 +15,10 @@ import Avatar from "@material-ui/core/Avatar";
 import "react-toastify/dist/ReactToastify.css";
 
 import useStyles from "./styles";
-
-import Modal from "@material-ui/core/Modal";
 import { LOGOUT } from "../../../constants/actionTypes";
 
 import SignUp from "../../authentication/SignUp/SignUp";
-import Mod from "../../Helpers/Modal/modal";
-
+import SignIn from "../../authentication/SignIn/SignIn";
 
 const Nav = styled.nav`
   background: none;
@@ -75,24 +72,29 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const [openSignUp, setOpenSignUp] = useState(false);
- 
+  const [openSignIn, setOpenSignIn] = useState(false);
+
   const handleOpen = () => {
     setOpenSignUp(true);
-  
   };
 
   const handleClose = () => {
     setOpenSignUp(false);
   };
 
- 
+  const handleOpenSignIn = () => {
+    setOpenSignIn(true);
+  };
+
+  const handleCloseSignIn = () => {
+    setOpenSignIn(false);
+  };
 
   const sellersData = useSelector((state) => state.user);
   const { isLoading, authData } = sellersData;
 
   const [anchorEl, setAnchorEl] = useState(null);
   
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -105,7 +107,6 @@ const Navbar = () => {
     dispatch({ type: LOGOUT });
     setAnchorEl(null);
   };
-
 
   return (
     <>
@@ -143,16 +144,26 @@ const Navbar = () => {
             </Menu>
           </div>
         ) : (
-          <>
+           <div className={classes.buttonDiv}>
             <Button onClick={handleOpen} className={classes.but}>
               Sign Up
             </Button>
-           
-              <SignUp openSignUp={openSignUp} 
+
+            <SignUp
+              openSignUp={openSignUp}
               setOpenSignUp={setOpenSignUp}
-              Close={handleClose} />
-           
-          </>
+              Close={handleClose}
+            />
+            <Button onClick={handleOpenSignIn} className={classes.but1}>
+              Sign In
+            </Button>
+            <SignIn
+              openSignIn={openSignIn}
+              setOpenSignUp={setOpenSignIn}
+              closeSignIn={handleCloseSignIn}
+            />
+            </div>
+          
         )}
       </Nav>
     </>

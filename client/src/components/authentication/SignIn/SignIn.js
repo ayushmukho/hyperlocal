@@ -11,6 +11,7 @@ import {
   InputAdornment,
   IconButton,
   Button,
+  Modal,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
@@ -30,7 +31,7 @@ import ellipse from "../../../images/ellipse.png";
 import { googleLogin, login } from "../../../actions/auth";
 import { toast } from "react-toastify";
 import gb from "../../../images/google.png";
-const SignIn = () => {
+const SignIn = ({openSignIn,closeSignIn}) => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ const SignIn = () => {
 
   return (
     <>
+      <Modal open={openSignIn} onClose={closeSignIn} className={classes.modal}>
       <Container className={classes.toplevel1}>
         <Grid container className={classes.toplevel2}>
           <Grid item md={5} className={classes.sublevel1}>
@@ -178,6 +180,7 @@ const SignIn = () => {
           </Grid>
         </Grid>
       </Container>
+      </Modal>
     </>
   );
 };

@@ -20,7 +20,7 @@ import gb from "../../../images/google.png";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
@@ -31,9 +31,9 @@ import logo from "../../../images/logo.png";
 import ellipse from "../../../images/ellipse.png";
 import * as api from "../../../api/index";
 import { googleLogin } from "../../../actions/auth";
-import SignIn from "../SignIn/SignIn";
 
-var linkClicked = "0";
+
+
 const SignUp = ({ openSignUp, Close, setOpenSignUp }) => {
   const classes = useStyles();
   const history = useHistory();
@@ -45,17 +45,8 @@ const SignUp = ({ openSignUp, Close, setOpenSignUp }) => {
     username: "",
   });
 
-  const [open, setOpen] = useState(false);
+ 
 
-  const handleOpen = () => {
-    setOpen(true);
-    setOpenSignUp(false);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setOpenSignUp(false)
-  };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -91,7 +82,6 @@ const SignUp = ({ openSignUp, Close, setOpenSignUp }) => {
   const googleError = () =>
     toast("Google Sign In was unsuccessful. Try again later");
 
-  
   return (
     <>
       <Modal open={openSignUp} onClose={Close} className={classes.modal}>
@@ -208,24 +198,6 @@ const SignUp = ({ openSignUp, Close, setOpenSignUp }) => {
                   >
                     Create Account
                   </Button>
-                  <Grid container style={{ marginTop: "10px" }}>
-                    <Grid item>
-                      <Button
-                        className={classes.LinkButton}
-                        style={{ color: "#0645AD" }}
-                        onClick={handleOpen}
-                      >
-                        Already have an account??
-                      </Button>
-                      <Modal
-                        open={open}
-                        onClose={handleClose}
-                        className={classes.modal}
-                      >
-                        <SignIn />
-                      </Modal>
-                    </Grid>
-                  </Grid>
                 </Box>
               </Box>
             </Grid>
@@ -236,5 +208,5 @@ const SignUp = ({ openSignUp, Close, setOpenSignUp }) => {
   );
 };
 
-export { linkClicked };
+
 export default SignUp;

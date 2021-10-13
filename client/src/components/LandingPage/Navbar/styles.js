@@ -46,6 +46,33 @@ export default makeStyles((theme) => ({
     },
   },
 
+  but1: {
+    backgroundColor: 'white',
+    border: '2px solid black',
+    color: 'black',
+    fontSize: '12px',
+    marginRight: '10px',
+    display: 'flex',
+    marginTop: '8px',
+    height: '40px',
+    paddingRight: '30px',
+    paddingLeft: '30px',
+    '&:hover': {
+      backgroundColor: 'black',
+      transform: 'scale(1.05)',
+      color: 'white',
+      transitionProperty: 'transform',
+      transitionDuration: '1s',
+    },
+  },
+
+  buttonDiv:{
+     display: 'flex',
+     
+
+  },
+
+
   logo_name: {
     display: 'flex',
     alignItems: 'center',
