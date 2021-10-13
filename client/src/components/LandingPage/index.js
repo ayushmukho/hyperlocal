@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar/Navbar'
 import Footer from './Footer/Footer'
-import Background from './Background/Backgound'
+import Background from './Background/Background'
 import SellerCard from './Seller'
 import Cards from './Cards'
 import { useSelector } from 'react-redux'

@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: (props) => `0px 5px 1px 1px ${props.color}`,
     marginBottom: '40px',
     cursor: 'pointer',
-    minWidth: 200,
+    minWidth: 220,
     [theme.breakpoints.down('md')]: {
       minWidth: 250,
     },

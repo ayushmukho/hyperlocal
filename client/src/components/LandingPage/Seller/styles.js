@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   card: {
-    maxWidth: 200,
-    maxHeight: 200,
+    maxWidth: 220,
+    maxHeight: 220,
     margin: 'auto',
     borderRadius: '30px 30px 20px 20px',
     transition: '0.3s',
