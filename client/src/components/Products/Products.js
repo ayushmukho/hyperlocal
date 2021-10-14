@@ -55,18 +55,19 @@ const Products = () => {
         className={classes.container}
       >
         <Grid item sm={2}>
-          <Typography gutterBottom>FILTERS</Typography>
-          <Typography gutterBottom>Price</Typography>
+          <Typography gutterBottom className={classes.filters}>FILTERS</Typography>
+          <Typography gutterBottom className={classes.price}>Price</Typography>
           <Slider
             value={value}
             onChange={handleChange}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
             getAriaValueText={valuetext}
+            className={classes.priceSlider}
             min={0}
             max={10000}
           />
-          <Typography>SORT BY</Typography>
+          <Typography gutterBottom className={classes.price}>Sort By</Typography>
           <FormGroup row>
             <FormControlLabel
               control={

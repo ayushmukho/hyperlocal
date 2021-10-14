@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
   card: {
     maxWidth: 325,
+    cursor: "pointer",
     // margin: "auto",
     borderRadius: 10,
     transition: "0.3s",
