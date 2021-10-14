@@ -54,9 +54,17 @@ const Products = () => {
         spacing={3}
         className={classes.container}
       >
-        <Grid item sm={2}>
-          <Typography gutterBottom className={classes.filters}>FILTERS</Typography>
-          <Typography gutterBottom className={classes.price}>Price</Typography>
+        <Grid
+          item
+          sm={2}
+          style={{ boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)", height: "500px" }}
+        >
+          <Typography gutterBottom className={classes.filters}>
+            FILTERS
+          </Typography>
+          <Typography gutterBottom className={classes.price}>
+            Price
+          </Typography>
           <Slider
             value={value}
             onChange={handleChange}
@@ -67,7 +75,9 @@ const Products = () => {
             min={0}
             max={10000}
           />
-          <Typography gutterBottom className={classes.price}>Sort By</Typography>
+          <Typography gutterBottom className={classes.price}>
+            Sort By
+          </Typography>
           <FormGroup row>
             <FormControlLabel
               control={
@@ -92,7 +102,12 @@ const Products = () => {
           </FormGroup>
         </Grid>
         <Grid item sm={10} xs={12} className={classes.container}>
-          <Grid container alignItems="stretch" spacing={4}>
+          <Grid
+            container
+            alignItems="stretch"
+            spacing={4}
+            style={{ marginLeft: "20px" }}
+          >
             <Grid item xs={12} sm={12} md={6} lg={4}>
               <Product />
             </Grid>
