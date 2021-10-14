@@ -38,11 +38,12 @@ export default makeStyles((theme) => ({
     paddingRight: '30px',
     paddingLeft: '30px',
     '&:hover': {
-      backgroundColor: '#423e3e',
+      backgroundColor: 'white',
       transform: 'scale(1.05)',
-      color: 'white',
+      color: 'black',
       transitionProperty: 'transform',
       transitionDuration: '1s',
+      border: '2px solid black',
     },
   },
 
@@ -66,12 +67,9 @@ export default makeStyles((theme) => ({
     },
   },
 
-  buttonDiv:{
-     display: 'flex',
-     
-
+  buttonDiv: {
+    display: 'flex',
   },
-
 
   logo_name: {
     display: 'flex',
