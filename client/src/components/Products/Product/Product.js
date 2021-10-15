@@ -14,7 +14,6 @@ import React from "react";
 import useStyles from "./styles";
 
 const Product = ({ product }) => {
-  console.log(product);
   const classes = useStyles();
   return (
     <div className="App">
@@ -38,7 +37,7 @@ const Product = ({ product }) => {
             className={"MuiTypography--subheading"}
             variant={"caption"}
           >
-            {product.description.split(' ').splice(0, 15).join(' ')}...
+            {product.description.split(" ").splice(0, 10).join(" ")}...
           </Typography>
         </CardContent>
         <Divider className={classes.divider} light />
@@ -51,7 +50,10 @@ const Product = ({ product }) => {
               <ShareIcon />
             </IconButton>
           </div>
-          <Link href="/cart" style={{ textDecoration: "none", marginTop: "5px" }}>
+          <Link
+            href="/cart"
+            style={{ textDecoration: "none", marginTop: "5px" }}
+          >
             <Button
               style={{
                 borderRadius: 25,
