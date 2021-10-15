@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Grid,
@@ -8,8 +8,8 @@ import {
   FormControlLabel,
   FormGroup,
   CircularProgress,
+  TextField,
 } from "@material-ui/core";
-import { green } from "@material-ui/core/colors";
 import { useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router";
@@ -18,31 +18,82 @@ import useStyles from "./styles";
 import { useSelector } from "react-redux";
 import Navbar from "../LandingPage/Navbar/Navbar";
 import { getProductsByCategory } from "../../actions/products";
-
-function valuetext(value) {
-  return `${value}°C`;
-}
+import ProductImage from "../../images/ProductImage";
+import Star from "../../images/star";
 
 const GreenCheckbox = withStyles({
   root: {
-    color: green[400],
+    color: "#FE8400",
     "&$checked": {
-      color: green[600],
+      color: "#FE8400",
     },
   },
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
+const PrettoSlider = withStyles({
+  root: {
+    color: "#FE8400",
+    height: 8,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#fff",
+    border: "2px solid currentColor",
+    marginTop: -8,
+    marginLeft: -12,
+    "&:focus, &:hover, &$active": {
+      boxShadow: "inherit",
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: "calc(-50% + 4px)",
+  },
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4,
+  },
+})(Slider);
+
 const Products = () => {
   const classes = useStyles();
   const { cat } = useParams();
-  const dispatch = useDispatch();
+  const [textInputMin, setTextInputMin] = useState(0);
+  const [textInputMax, setTextInputMax] = useState(10000);
 
-  const [value, setValue] = React.useState([0, 10000]);
+  const categoriesData = useSelector((state) => state.getAllCategories);
+  const dispatch = useDispatch();
+  const [value, setValue] = useState([textInputMin, textInputMax]);
+
+  const handleChangeSlider = (event, newValue) => {
+    setValue(newValue);
+  };
+
   const [state, setState] = React.useState({
-    checkedHighToLow: false,
-    checkedLowToHigh: false,
+    checked1: false,
+    checked2: false,
+    checked3: false,
+    checked4: false,
+    checked5: false,
   });
+
+  const handleTextInputChangeMin = (event) => {
+    setTextInputMin(event.target.value);
+  };
+
+  const handleTextInputChangeMax = (event) => {
+    setTextInputMax(event.target.value);
+  };
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
 
   useEffect(() => {
     dispatch(getProductsByCategory(cat));
@@ -52,13 +103,6 @@ const Products = () => {
 
   const { isLoading, products } = productData;
 
-  const handleChangeCheckBox = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   return (
     <Container maxWidth="xl">
       <Navbar />
@@ -66,64 +110,177 @@ const Products = () => {
         container
         justifyContent="space-between"
         alignItems="stretch"
-        spacing={3}
+        spacing={2}
         className={classes.container}
       >
-        <Grid
-          item
-          sm={2}
-          style={{
-            boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
-            height: "500px",
-          }}
-        >
-          <Typography gutterBottom className={classes.filters}>
-            FILTERS
-          </Typography>
-          <Typography gutterBottom className={classes.price}>
-            Price
-          </Typography>
-          <Slider
-            value={value}
-            onChange={handleChange}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-            getAriaValueText={valuetext}
-            className={classes.priceSlider}
-            min={0}
-            max={10000}
-          />
-          <Typography gutterBottom className={classes.price}>
-            Sort By
-          </Typography>
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <GreenCheckbox
-                  checked={state.checkedHighToLow}
-                  onChange={handleChangeCheckBox}
-                  name="checkedHighToLow"
-                />
-              }
-              label="Price-High to Low"
+        <Grid item sm={3}>
+          <ProductImage />
+          <div className={classes.univ}>
+            <Typography gutterBottom className={classes.categories}>
+              Categories
+            </Typography>
+            {!categoriesData.isLoading &&
+              categoriesData.categories.map((category, i) => (
+                <div
+                  style={{ justifyContent: "space-between", display: "flex" }}
+                >
+                  <div>
+                    <Typography gutterBottom style={{ fontSize: "14px" }}>
+                      {category.name}
+                    </Typography>
+                  </div>
+
+                  <Typography
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      color: "#FE8400",
+                    }}
+                  >
+                    320
+                  </Typography>
+                </div>
+              ))}
+          </div>
+          <div className={classes.univ}>
+            <Typography gutterBottom className={classes.categories}>
+              Rating
+            </Typography>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <GreenCheckbox
+                    checked={state.checked5}
+                    onChange={handleChange}
+                    name="checked5"
+                  />
+                }
+                label={
+                  <>
+                    <Star /> <Star /> <Star /> <Star /> <Star />
+                  </>
+                }
+              />
+            </FormGroup>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <GreenCheckbox
+                    checked={state.checked4}
+                    onChange={handleChange}
+                    name="checked4"
+                  />
+                }
+                label={
+                  <>
+                    <Star /> <Star /> <Star /> <Star />{" "}
+                  </>
+                }
+              />
+            </FormGroup>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <GreenCheckbox
+                    checked={state.checked3}
+                    onChange={handleChange}
+                    name="checked3"
+                  />
+                }
+                label={
+                  <>
+                    <Star /> <Star /> <Star />
+                  </>
+                }
+              />
+            </FormGroup>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <GreenCheckbox
+                    checked={state.checked2}
+                    onChange={handleChange}
+                    name="checked2"
+                  />
+                }
+                label={
+                  <>
+                    <Star /> <Star />
+                  </>
+                }
+              />
+            </FormGroup>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <GreenCheckbox
+                    checked={state.checked1}
+                    onChange={handleChange}
+                    name="checked1"
+                  />
+                }
+                label={
+                  <>
+                    <Star />
+                  </>
+                }
+              />
+            </FormGroup>
+          </div>
+          <div className={classes.univ}>
+            <Typography gutterBottom className={classes.categories}>
+              Price
+            </Typography>
+            <PrettoSlider
+              value={value}
+              onChange={handleChangeSlider}
+              valueLabelDisplay="auto"
+              aria-label="pretto slider"
+              defaultValue={20}
+              min={0}
+              max={10000}
             />
-            <FormControlLabel
-              control={
-                <GreenCheckbox
-                  checked={state.checkedLowToHigh}
-                  onChange={handleChangeCheckBox}
-                  name="checkedLowToHigh"
+            <div style={{ justifyContent: "space-between", display: "flex" }}>
+              <div>
+                <Typography
+                  gutterBottom
+                  style={{ fontSize: "14px", fontWeight: 600 }}
+                >
+                  Min
+                </Typography>
+                <TextField
+                  id="outlined-secondary"
+                  size="small"
+                  variant="outlined"
+                  color="#FE8400"
+                  style={{ width: "109px" }}
+                  onChange={handleTextInputChangeMin}
                 />
-              }
-              label="Price-Low to High"
-            />
-          </FormGroup>
+              </div>
+              <div>
+                <Typography
+                  gutterBottom
+                  style={{ fontSize: "14px", fontWeight: 600 }}
+                >
+                  Max
+                </Typography>
+                <TextField
+                  id="outlined-secondary"
+                  size="small"
+                  variant="outlined"
+                  color="#FE8400"
+                  style={{ width: "109px" }}
+                  onChange={handleTextInputChangeMax}
+                />
+              </div>
+            </div>
+          </div>
         </Grid>
-        <Grid item sm={10} xs={12} className={classes.container}>
+        <Grid item sm={9} xs={12} className={classes.container}>
           <Grid
             container
             alignItems="stretch"
-            spacing={4}
+            spacing={3}
             style={{ marginLeft: "20px" }}
           >
             {isLoading ? (
