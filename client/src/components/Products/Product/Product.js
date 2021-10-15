@@ -13,7 +13,8 @@ import ShareIcon from "@material-ui/icons/Share";
 import React from "react";
 import useStyles from "./styles";
 
-const Product = () => {
+const Product = ({ product }) => {
+  console.log(product);
   const classes = useStyles();
   return (
     <div className="App">
@@ -31,13 +32,13 @@ const Product = () => {
             variant={"h6"}
             gutterBottom
           >
-            HEADING OF ITEM
+            {product.name}
           </Typography>
           <Typography
             className={"MuiTypography--subheading"}
             variant={"caption"}
           >
-            description of the item
+            {product.description.split(' ').splice(0, 15).join(' ')}...
           </Typography>
         </CardContent>
         <Divider className={classes.divider} light />

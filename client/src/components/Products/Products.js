@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Grid,
@@ -7,12 +7,17 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  CircularProgress,
 } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
+import { useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router";
 import Product from "./Product/Product";
 import useStyles from "./styles";
+import { useSelector } from "react-redux";
 import Navbar from "../LandingPage/Navbar/Navbar";
+import { getProductsByCategory } from "../../actions/products";
 
 function valuetext(value) {
   return `${value}°C`;
@@ -30,12 +35,22 @@ const GreenCheckbox = withStyles({
 
 const Products = () => {
   const classes = useStyles();
+  const { cat } = useParams();
+  const dispatch = useDispatch();
 
   const [value, setValue] = React.useState([0, 10000]);
   const [state, setState] = React.useState({
-    checkedHighToLow: true,
-    checkedLowToHigh: true,
+    checkedHighToLow: false,
+    checkedLowToHigh: false,
   });
+
+  useEffect(() => {
+    dispatch(getProductsByCategory(cat));
+  }, [cat, dispatch]);
+
+  const productData = useSelector((state) => state.getAllProductsByCategory);
+
+  const { isLoading, products } = productData;
 
   const handleChangeCheckBox = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -49,7 +64,7 @@ const Products = () => {
       <Navbar />
       <Grid
         container
-        justify="space-between"
+        justifyContent="space-between"
         alignItems="stretch"
         spacing={3}
         className={classes.container}
@@ -57,7 +72,10 @@ const Products = () => {
         <Grid
           item
           sm={2}
-          style={{ boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)", height: "500px" }}
+          style={{
+            boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+            height: "500px",
+          }}
         >
           <Typography gutterBottom className={classes.filters}>
             FILTERS
@@ -108,18 +126,15 @@ const Products = () => {
             spacing={4}
             style={{ marginLeft: "20px" }}
           >
-            <Grid item xs={12} sm={12} md={6} lg={4}>
-              <Product />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={4}>
-              <Product />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={4}>
-              <Product />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={4}>
-              <Product />
-            </Grid>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              products.map((product, i) => (
+                <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
+                  <Product product={product} />
+                </Grid>
+              ))
+            )}
           </Grid>
         </Grid>
       </Grid>

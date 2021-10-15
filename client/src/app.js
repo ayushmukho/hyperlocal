@@ -39,7 +39,7 @@ const App = () => {
           <Route path="/register" exact component={SignUp} />
           <Route path="/user/activate/:id" exact component={Activation} />
           <Route path="/login" exact component={SignIn} />
-          <Route path="/products" exact component={Products} />
+          <Route path="/categories/:cat" exact component={Products} />
         </Switch>
         <ToastContainer />
       </BrowserRouter>

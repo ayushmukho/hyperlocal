@@ -6,7 +6,7 @@ import { categoriesReducer } from "./categories"
 
 export const reducers = combineReducers({
   user: authReducer,
-  getAllProducts: productReducer,
+  getAllProductsByCategory: productReducer,
   getAllSellers: sellerReducer,
   getAllCategories: categoriesReducer,
 });

@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 export default function Index() {
   const categoriesData = useSelector((state) => state.getAllCategories)
   const { categories } = categoriesData
+  // console.log("Categories: ", categories);
   const sellersData = useSelector((state) => state.getAllSellers)
   const { sellers } = sellersData
   const classes = useStyles()
@@ -99,6 +100,7 @@ export default function Index() {
               <Cards
                 name={category.name}
                 img={category.image}
+                id={category._id}
                 description={category.description}
                 color={colours[i]}
               />
