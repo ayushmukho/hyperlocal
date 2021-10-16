@@ -17,6 +17,12 @@ export default makeStyles((theme) => ({
       display: "none",
     },
   },
+  gifProduct: {
+    marginLeft: "29vw",
+    marginTop: "13vh",
+    width: "20vw",
+    height: "40vh",
+  },
   heroBox: {
     backgroundColor: "background: #F9F9F9",
     border: "1px solid #D1D1D1",

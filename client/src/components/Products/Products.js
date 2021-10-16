@@ -24,6 +24,7 @@ import Navbar from "../LandingPage/Navbar/Navbar";
 import { getProductsByCategory } from "../../actions/products";
 import ProductImage from "../../images/ProductImage";
 import Star from "../../images/star";
+import NoPro from "../../images/noPro.gif"
 import { Search, Clear } from "@material-ui/icons";
 
 const GreenCheckbox = withStyles({
@@ -71,10 +72,13 @@ const Products = () => {
   const { cat } = useParams();
   const [textInputMin, setTextInputMin] = useState(0);
   const [textInputMax, setTextInputMax] = useState(10000);
+
   const [search, setSearch] = useState("");
   const categoriesData = useSelector((state) => state.getAllCategories);
   const productData = useSelector((state) => state.getAllProductsByCategory);
   const { isLoading, products } = productData;
+  const [data, setData] = useState(products);
+  const [output, setOutput] = useState([]);
   const dispatch = useDispatch();
   const [value, setValue] = useState([textInputMin, textInputMax]);
 
@@ -101,7 +105,7 @@ const Products = () => {
 
   const handleClear = () => {
     setSearch("");
-  }
+  };
 
   const handleTextInputChangeMin = (event) => {
     setTextInputMin(event.target.value);
@@ -123,6 +127,20 @@ const Products = () => {
     dispatch(getProductsByCategory(cat));
   }, [cat, dispatch]);
 
+  useEffect(() => {
+    setOutput([]);
+    data.filter((val) => {
+      if(search === ""){
+        setOutput(products)
+      }
+      else if (val.name.toLowerCase().includes(search.toLowerCase())) {
+        setOutput((output) => [...output, val]);
+      }
+    });
+  }, [data, products, search]);
+
+  console.log("Output", output);
+
   return (
     <Container maxWidth="xl">
       <Navbar />
@@ -137,7 +155,10 @@ const Products = () => {
           style={{ marginLeft: "10px", width: "37vw" }}
           placeholder="Search for what you are looking for..."
         />
-        <IconButton onClick={ search === "" ? handleSearch : handleClear} aria-label="search">
+        <IconButton
+          onClick={search === "" ? handleSearch : handleClear}
+          aria-label="search"
+        >
           {search === "" ? <Search /> : <Clear />}
         </IconButton>
       </div>
@@ -364,23 +385,18 @@ const Products = () => {
           >
             {isLoading ? (
               <CircularProgress />
+            ) : output.length === 0 ? (
+              // eslint-disable-next-line jsx-a11y/alt-text
+              <img
+                src={NoPro}
+                className={classes.gifProduct}
+              />
             ) : (
-              products
-                // eslint-disable-next-line array-callback-return
-                .filter((val) => {
-                  if (search === "") {
-                    return val;
-                  } else if (
-                    val.name.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return val;
-                  }
-                })
-                .map((product, i) => (
-                  <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
-                    <Product key={i} product={product} />
-                  </Grid>
-                ))
+              output.map((product, i) => (
+                <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
+                  <Product key={i} product={product} />
+                </Grid>
+              ))
             )}
           </Grid>
         </Grid>
