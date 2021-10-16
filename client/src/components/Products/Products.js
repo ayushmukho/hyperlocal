@@ -72,6 +72,7 @@ const Products = () => {
   const [textInputMin, setTextInputMin] = useState(0);
   const [textInputMax, setTextInputMax] = useState(10000);
   const [search, setSearch] = useState("");
+  const [searchItem, setSearchItem] = useState("")
 
   const categoriesData = useSelector((state) => state.getAllCategories);
   const productData = useSelector((state) => state.getAllProductsByCategory);
@@ -97,8 +98,8 @@ const Products = () => {
   });
 
   const handleSearch = () => {
-    console.log(search);
-  }
+    setSearchItem(search);
+  };
 
   const handleTextInputChangeMin = (event) => {
     setTextInputMin(event.target.value);
@@ -361,7 +362,13 @@ const Products = () => {
             {isLoading ? (
               <CircularProgress />
             ) : (
-              products.map((product, i) => (
+              products.filter((val) => {
+                if(search === ""){
+                  return val
+                }else if(val.name.toLowerCase().includes(searchItem.toLowerCase())){
+                  return val
+                }
+              }).map((product, i) => (
                 <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
                   <Product key={i} product={product} />
                 </Grid>

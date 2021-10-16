@@ -44,10 +44,7 @@ const Product = ({ product }) => {
             href="/cart"
             style={{ textDecoration: "none", marginTop: "5px" }}
           >
-            <Button
-              className={classes.button}
-              variant="contained"
-            >
+            <Button className={classes.button} variant="contained">
               Buy Now
             </Button>
           </Link>
