@@ -9,6 +9,10 @@ import {
   FormGroup,
   CircularProgress,
   TextField,
+  Button,
+  Box,
+  InputBase,
+  IconButton,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
@@ -20,6 +24,7 @@ import Navbar from "../LandingPage/Navbar/Navbar";
 import { getProductsByCategory } from "../../actions/products";
 import ProductImage from "../../images/ProductImage";
 import Star from "../../images/star";
+import { Search } from "@material-ui/icons";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -66,8 +71,11 @@ const Products = () => {
   const { cat } = useParams();
   const [textInputMin, setTextInputMin] = useState(0);
   const [textInputMax, setTextInputMax] = useState(10000);
+  const [search, setSearch] = useState("");
 
   const categoriesData = useSelector((state) => state.getAllCategories);
+  const productData = useSelector((state) => state.getAllProductsByCategory);
+  const { isLoading, products } = productData;
   const dispatch = useDispatch();
   const [value, setValue] = useState([textInputMin, textInputMax]);
 
@@ -75,13 +83,22 @@ const Products = () => {
     setValue(newValue);
   };
 
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     checked1: false,
     checked2: false,
     checked3: false,
     checked4: false,
     checked5: false,
   });
+
+  const [sort, setSort] = useState({
+    asc: false,
+    dsc: false,
+  });
+
+  const handleSearch = () => {
+    console.log(search);
+  }
 
   const handleTextInputChangeMin = (event) => {
     setTextInputMin(event.target.value);
@@ -95,17 +112,65 @@ const Products = () => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
+  const handelSortChange = (event) => {
+    setSort({ ...sort, [event.target.name]: event.target.checked });
+  };
+
   useEffect(() => {
     dispatch(getProductsByCategory(cat));
   }, [cat, dispatch]);
 
-  const productData = useSelector((state) => state.getAllProductsByCategory);
-
-  const { isLoading, products } = productData;
-
   return (
     <Container maxWidth="xl">
       <Navbar />
+      <Typography className={classes.title}>Electronics</Typography>
+      <div className={classes.searchBox}>
+        <InputBase
+          onChange={(event) => {
+            //adding the onChange event
+            setSearch(event.target.value);
+          }}
+          style={{ marginLeft: "10px", width: "37vw" }}
+          placeholder="Search for what you are looking for..."
+        />
+        <IconButton onClick={handleSearch} aria-label="search">
+          <Search />
+        </IconButton>
+      </div>
+      <div style={{ display: "flex" }}>
+        <Box className={classes.heroBox}>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <GreenCheckbox
+                  checked={state.asc}
+                  onChange={handelSortChange}
+                  name="asc"
+                />
+              }
+              label={
+                <Typography style={{ fontSize: "12px" }}>
+                  Sort in Asc
+                </Typography>
+              }
+            />
+            <FormControlLabel
+              control={
+                <GreenCheckbox
+                  checked={state.dsc}
+                  onChange={handelSortChange}
+                  name="dsc"
+                />
+              }
+              label={
+                <Typography style={{ fontSize: "12px" }}>
+                  Sort in Dsc
+                </Typography>
+              }
+            />
+          </FormGroup>
+        </Box>
+      </div>
       <Grid
         container
         justifyContent="space-between"
@@ -113,7 +178,7 @@ const Products = () => {
         spacing={2}
         className={classes.container}
       >
-        <Grid item sm={3}>
+        <Grid item sm={2} className={classes.hide}>
           <ProductImage />
           <div className={classes.univ}>
             <Typography gutterBottom className={classes.categories}>
@@ -253,7 +318,7 @@ const Products = () => {
                   size="small"
                   variant="outlined"
                   color="#FE8400"
-                  style={{ width: "109px" }}
+                  style={{ width: "79px" }}
                   onChange={handleTextInputChangeMin}
                 />
               </div>
@@ -269,26 +334,36 @@ const Products = () => {
                   size="small"
                   variant="outlined"
                   color="#FE8400"
-                  style={{ width: "109px" }}
+                  style={{ width: "79px" }}
                   onChange={handleTextInputChangeMax}
                 />
               </div>
             </div>
           </div>
+          <div className={classes.univ}>
+            <div style={{ justifyContent: "space-between", display: "flex" }}>
+              <Button className={classes.button} variant="contained">
+                Apply
+              </Button>
+              <Button className={classes.button2} variant="contained">
+                Reset
+              </Button>
+            </div>
+          </div>
         </Grid>
-        <Grid item sm={9} xs={12} className={classes.container}>
+        <Grid item sm={10} xs={12} className={classes.container}>
           <Grid
             container
             alignItems="stretch"
             spacing={3}
-            style={{ marginLeft: "20px" }}
+            style={{ marginLeft: "70px" }}
           >
             {isLoading ? (
               <CircularProgress />
             ) : (
               products.map((product, i) => (
                 <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
-                  <Product product={product} />
+                  <Product key={i} product={product} />
                 </Grid>
               ))
             )}

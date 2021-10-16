@@ -3,13 +3,9 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Divider,
-  IconButton,
   Typography,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import React from "react";
 import useStyles from "./styles";
 
