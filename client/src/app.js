@@ -5,7 +5,7 @@ import SignIn from "./components/authentication/SignIn/SignIn";
 import SignUp from "./components/authentication/SignUp/SignUp";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Activation from "./components/authentication/Activation";
-import LandingPage from "./components/LandingPage"
+import LandingPage from "./components/LandingPage";
 import { useEffect } from "react";
 import { userByAccessToken } from "./actions/auth";
 import PrivateRoute from "./components/PrivateRoute";
@@ -13,7 +13,8 @@ import Profile from "./pages/Profile/Profile";
 import Products from "./components/Products/Products";
 import { getSellers } from "./actions/sellers";
 import { getCategories } from "./actions/categories";
-import './app.css';
+import "./app.css";
+import ScrollToTop from "./utils/ScrollToTop";
 const App = () => {
   const dispatch = useDispatch();
   const access_token = localStorage.getItem("access_token");
@@ -25,23 +26,24 @@ const App = () => {
   }, [access_token, dispatch]);
 
   useEffect(() => {
-    dispatch(getSellers())
-    dispatch(getCategories())
-  }, [dispatch])
-
+    dispatch(getSellers());
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <>
       <BrowserRouter>
-        <Switch>
-          <Route path="/" exact component={LandingPage} />
-          <PrivateRoute path="/user/profile" exact component={Profile} />
-          <Route path="/register" exact component={SignUp} />
-          <Route path="/user/activate/:id" exact component={Activation} />
-          <Route path="/login" exact component={SignIn} />
-          <Route path="/categories/:cat" exact component={Products} />
-        </Switch>
-        <ToastContainer />
+        <ScrollToTop>
+          <Switch>
+            <Route path="/" exact component={LandingPage} />
+            <PrivateRoute path="/user/profile" exact component={Profile} />
+            <Route path="/register" exact component={SignUp} />
+            <Route path="/user/activate/:id" exact component={Activation} />
+            <Route path="/login" exact component={SignIn} />
+            <Route path="/categories/:cat" exact component={Products} />
+          </Switch>
+          <ToastContainer />
+        </ScrollToTop>
       </BrowserRouter>
     </>
   );

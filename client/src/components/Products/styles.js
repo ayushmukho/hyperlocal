@@ -4,18 +4,38 @@ export default makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
   },
+  inputBase: {
+    marginLeft: "15px",
+    width: "40vw",
+    backgroundColor: "#F9F9F9",
+    height: "54px",
+    borderRadius: "12px 0 0 12px",
+    paddingLeft: "10px",
+  },
+  iconButton: {
+    backgroundColor: "#F9F9F9",
+    height: "54px",
+    borderRadius: "0 12px 12px 0",
+    "&:hover": {
+      background: "#F9F9F9",
+    },
+  },
   searchBox: {
     display: "flex",
     alignItems: "center",
-    backgroundColor: "#F9F9F9",
-    border: "1px solid #D1D1D1",
-    height: "42px",
+    height: "54px",
     width: "40vw",
     borderRadius: "12px",
     marginLeft: "35vw",
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
+  },
+  gifProduct: {
+    marginLeft: "29vw",
+    marginTop: "13vh",
+    width: "20vw",
+    height: "40vh",
   },
   heroBox: {
     backgroundColor: "background: #F9F9F9",
