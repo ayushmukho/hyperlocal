@@ -13,9 +13,14 @@ export const googleLogin = (token) => API.post("/auth/google_login", {tokenid: t
 /* @SIGNIN-API */
 export const signIn = (formData) => API.post("/auth/login", formData);
 
-/* @PRODUCT-API */
-export const fetchProducts = () => API.get("/products");
-export const fetchSingleProduct = (id) => API.get(`/products/${id}`);
+/* @PRODUCT-CATEGORY-API */
+export const fetchProductsByCategory = (cat) => API.get(`/products/category/${cat}`);
 
 /* @CART-API */
 export const addToCart = (id) => API.get("/");
+
+/* @SELLERS-API */
+export const fetchSellers = () => API.get("/seller");
+
+/* @CATEGORIES-API */
+export const fetchCategories = () => API.get('/category')

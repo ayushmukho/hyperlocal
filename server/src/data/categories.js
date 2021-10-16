@@ -22,9 +22,10 @@ const categories = [
   },
   {
     admin: new ObjectID("614ff307cc06fd71f6943615"),
-    name: "Services",
+    name: "Hand Tools",
     coverImage: "https://source.unsplash.com/NfG4rXmceFM/1600x425",
-    description: "Services",
+    description: "Hardware Tools for machinery",
   },
 ];
+
 export default categories;

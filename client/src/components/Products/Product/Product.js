@@ -3,17 +3,13 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Divider,
-  IconButton,
   Typography,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import React from "react";
 import useStyles from "./styles";
 
-const Product = () => {
+const Product = ({ product }) => {
   const classes = useStyles();
   return (
     <div className="App">
@@ -31,36 +27,25 @@ const Product = () => {
             variant={"h6"}
             gutterBottom
           >
-            HEADING OF ITEM
+            {product.name}
           </Typography>
           <Typography
             className={"MuiTypography--subheading"}
             variant={"caption"}
           >
-            description of the item
+            {product.description.split(" ").splice(0, 10).join(" ")}...
           </Typography>
         </CardContent>
-        <Divider className={classes.divider} light />
         <CardContent className={classes.mid}>
           <div>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
+            <Typography variant={"h6"}>{product.price} USD</Typography>
           </div>
-          <Link href="/cart" style={{ textDecoration: "none", marginTop: "5px" }}>
-            <Button
-              style={{
-                borderRadius: 25,
-                backgroundColor: "#Fe8400",
-                padding: "8px 16px",
-                fontSize: "12px",
-              }}
-              variant="contained"
-            >
-              ADD TO CART
+          <Link
+            href="/cart"
+            style={{ textDecoration: "none", marginTop: "5px" }}
+          >
+            <Button className={classes.button} variant="contained">
+              Buy Now
             </Button>
           </Link>
         </CardContent>

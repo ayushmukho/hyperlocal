@@ -1,4 +1,4 @@
-import { AUTH, GET_USER_BY_ACCESS_TOKEN } from "../constants/actionTypes";
+import { AUTH, GET_USER_BY_ACCESS_TOKEN, LOGOUT } from "../constants/actionTypes";
 
 export const authReducer = (state = { authData: null, isLoading: true }, action) => {
   switch (action.type) {
@@ -7,6 +7,9 @@ export const authReducer = (state = { authData: null, isLoading: true }, action)
       return { ...state, authData: action.payload.user, isLoading: false };
     case GET_USER_BY_ACCESS_TOKEN:
       return { ...state, authData: action.payload, isLoading: false }
+    case LOGOUT:
+      localStorage.clear();
+      return { ...state, authData: null, isLoading: true };
     default:
       return state;
   }
