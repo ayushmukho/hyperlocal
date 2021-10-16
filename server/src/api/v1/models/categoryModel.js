@@ -11,7 +11,7 @@ const categorySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
+    coverImage: {
       type: String,
       required: true,
       default:

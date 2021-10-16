@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import vars from "../../../config/vars.js";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
-import SellerApplication from "../models/sellerApplicationModel.js";
+
 import {
   createAccessToken,
   createActivationToken,
@@ -58,7 +58,9 @@ export const register = async (req, res) => {
   });
   const activationUrl = `${vars.clientUrl}/user/activate/${activationToken}`;
   sendEmail(email, activationUrl, "Verify Mail");
-  res.status(200).json({ message: "Registered! Activation email sent" });
+  res
+    .status(200)
+    .json({ message: `Registered! Activation email sent to ${email}` });
 };
 
 /**
