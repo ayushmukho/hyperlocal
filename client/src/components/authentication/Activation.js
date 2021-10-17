@@ -107,7 +107,7 @@ const Activation = () => {
               </Button>
             </Link>
           ) : (
-            <Link to="/register" style={{ textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
               <Button
                 style={{
                   borderRadius: 25,

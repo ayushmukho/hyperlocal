@@ -97,8 +97,12 @@ const Products = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState([textInputMin, textInputMax]);
 
-  const handleSorting = (event) => {
-    setSorting(event.target.value);
+  const handleSorting = (sortEvent) => {
+    if (sortEvent === "asc") {
+      setOutput(priceFilterAsc(output));
+    } else if (sortEvent === "dsc") {
+      setOutput(priceFilterDsc(output));
+    }
   };
 
   const handleChangeSlider = (event, newValue) => {
@@ -112,8 +116,6 @@ const Products = () => {
     checked4: false,
     checked5: false,
   });
-
-  console.log("sorting", sorting);
 
   const handleSearch = () => {
     setSearch(search);
@@ -133,6 +135,22 @@ const Products = () => {
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
+  const priceFilterAsc = (vals) => {
+    return vals.sort((a, b) => {
+      const aPrice = a.price;
+      const bPrice = b.price;
+      return aPrice - bPrice;
+    });
+  };
+
+  const priceFilterDsc = (vals) => {
+    return vals.sort((a, b) => {
+      const aPrice = a.price;
+      const bPrice = b.price;
+      return bPrice - aPrice;
+    });
   };
 
   useEffect(() => {
@@ -189,7 +207,6 @@ const Products = () => {
           />
           <InputBase
             onChange={(event) => {
-              //adding the onChange event
               setSearch(event.target.value);
             }}
             value={search}
@@ -214,7 +231,10 @@ const Products = () => {
                 row
                 name="sort1"
                 value={sorting}
-                onChange={handleSorting}
+                onChange={(e) => {
+                  setSorting(e.target.value);
+                  handleSorting(e.target.value);
+                }}
               >
                 <FormControlLabel
                   value="asc"
