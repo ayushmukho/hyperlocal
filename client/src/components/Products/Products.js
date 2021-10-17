@@ -13,10 +13,12 @@ import {
   Box,
   InputBase,
   IconButton,
+  RadioGroup,
+  Radio,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import Product from "./Product/Product";
 import useStyles from "./styles";
@@ -69,13 +71,24 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
+const GreenRadio = withStyles({
+  root: {
+    color: "#FE8400",
+    "&$checked": {
+      color: "#FE8400",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
+
 const Products = () => {
   const classes = useStyles();
   const { cat } = useParams();
   const [textInputMin, setTextInputMin] = useState(0);
   const [textInputMax, setTextInputMax] = useState(10000);
-  const history = useHistory()
+  const history = useHistory();
   const [search, setSearch] = useState("");
+  const [sorting, setSorting] = useState("");
   const categoriesData = useSelector((state) => state.getAllCategories);
   const productData = useSelector((state) => state.getAllProductsByCategory);
   const { isLoading, products } = productData;
@@ -83,6 +96,10 @@ const Products = () => {
   const [output, setOutput] = useState([]);
   const dispatch = useDispatch();
   const [value, setValue] = useState([textInputMin, textInputMax]);
+
+  const handleSorting = (event) => {
+    setSorting(event.target.value);
+  };
 
   const handleChangeSlider = (event, newValue) => {
     setValue(newValue);
@@ -96,10 +113,7 @@ const Products = () => {
     checked5: false,
   });
 
-  const [sort, setSort] = useState({
-    asc: false,
-    dsc: false,
-  });
+  console.log("sorting", sorting);
 
   const handleSearch = () => {
     setSearch(search);
@@ -119,10 +133,6 @@ const Products = () => {
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  const handelSortChange = (event) => {
-    setSort({ ...sort, [event.target.name]: event.target.checked });
   };
 
   useEffect(() => {
@@ -162,7 +172,9 @@ const Products = () => {
             options={categoriesData.categories}
             getOptionLabel={(option) => option.name}
             style={{ width: 300 }}
-            onChange={(e, newValue) => newValue ? history.push(`/categories/${newValue?._id}`) : null}
+            onChange={(e, newValue) =>
+              newValue ? history.push(`/categories/${newValue?._id}`) : null
+            }
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -197,34 +209,32 @@ const Products = () => {
         <div style={{ display: "flex" }}>
           <Box className={classes.heroBox}>
             <FormGroup row>
-              <FormControlLabel
-                control={
-                  <GreenCheckbox
-                    checked={state.asc}
-                    onChange={handelSortChange}
-                    name="asc"
-                  />
-                }
-                label={
-                  <Typography style={{ fontSize: "12px" }}>
-                    Sort in Asc
-                  </Typography>
-                }
-              />
-              <FormControlLabel
-                control={
-                  <GreenCheckbox
-                    checked={state.dsc}
-                    onChange={handelSortChange}
-                    name="dsc"
-                  />
-                }
-                label={
-                  <Typography style={{ fontSize: "12px" }}>
-                    Sort in Dsc
-                  </Typography>
-                }
-              />
+              <RadioGroup
+                aria-label="sorting"
+                row
+                name="sort1"
+                value={sorting}
+                onChange={handleSorting}
+              >
+                <FormControlLabel
+                  value="asc"
+                  control={<GreenRadio />}
+                  label={
+                    <Typography style={{ fontSize: "12px" }}>
+                      Sort in Asc
+                    </Typography>
+                  }
+                />
+                <FormControlLabel
+                  value="dsc"
+                  control={<GreenRadio />}
+                  label={
+                    <Typography style={{ fontSize: "12px" }}>
+                      Sort in Dsc
+                    </Typography>
+                  }
+                />
+              </RadioGroup>
             </FormGroup>
           </Box>
         </div>
