@@ -155,7 +155,6 @@ const Products = () => {
   };
 
   const handleApplyFilters = () => {
-    console.log(value, state);
     setOutput([]);
     // eslint-disable-next-line array-callback-return
     products.filter((val) => {
@@ -186,6 +185,7 @@ const Products = () => {
 
   useEffect(() => {
     setOutput([]);
+    setSorting("");
     // eslint-disable-next-line array-callback-return
     products.filter((val) => {
       if (search === "") {
