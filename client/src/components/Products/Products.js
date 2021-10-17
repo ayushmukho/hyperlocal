@@ -84,8 +84,6 @@ const GreenRadio = withStyles({
 const Products = () => {
   const classes = useStyles();
   const { cat } = useParams();
-  const [textInputMin, setTextInputMin] = useState(0);
-  const [textInputMax, setTextInputMax] = useState(10000);
   const history = useHistory();
   const [search, setSearch] = useState("");
   const [sorting, setSorting] = useState("");
@@ -95,7 +93,14 @@ const Products = () => {
   const [category, setCategory] = useState({});
   const [output, setOutput] = useState([]);
   const dispatch = useDispatch();
-  const [value, setValue] = useState([textInputMin, textInputMax]);
+  const [value, setValue] = useState([0, 10000]);
+  const [state, setState] = useState({
+    checked1: false,
+    checked2: false,
+    checked3: false,
+    checked4: false,
+    checked5: false,
+  });
 
   const handleSorting = (sortEvent) => {
     if (sortEvent === "asc") {
@@ -109,14 +114,6 @@ const Products = () => {
     setValue(newValue);
   };
 
-  const [state, setState] = useState({
-    checked1: false,
-    checked2: false,
-    checked3: false,
-    checked4: false,
-    checked5: false,
-  });
-
   const handleSearch = () => {
     setSearch(search);
   };
@@ -126,11 +123,15 @@ const Products = () => {
   };
 
   const handleTextInputChangeMin = (event) => {
-    setTextInputMin(event.target.value);
+    let newArr = [...value];
+    newArr[0] = event.target.value;
+    setValue(newArr);
   };
 
   const handleTextInputChangeMax = (event) => {
-    setTextInputMax(event.target.value);
+    let newArr = [...value];
+    newArr[1] = event.target.value;
+    setValue(newArr);
   };
 
   const handleChange = (event) => {
@@ -151,6 +152,29 @@ const Products = () => {
       const bPrice = b.price;
       return bPrice - aPrice;
     });
+  };
+
+  const handleApplyFilters = () => {
+    console.log(value, state);
+    setOutput([]);
+    // eslint-disable-next-line array-callback-return
+    products.filter((val) => {
+      if(val.price >= value[0] && val.price <= value[1]) {
+        setOutput((output) => [...output, val]);
+      }
+    })
+  };
+
+  const handleRemoveFilters = () => {
+    setState({
+      checked1: false,
+      checked2: false,
+      checked3: false,
+      checked4: false,
+      checked5: false,
+    });
+    setValue([0, 10000]);
+    setOutput(products);
   };
 
   useEffect(() => {
@@ -407,6 +431,7 @@ const Products = () => {
                     variant="outlined"
                     color="#FE8400"
                     style={{ width: "79px" }}
+                    value={value[0]}
                     onChange={handleTextInputChangeMin}
                   />
                 </div>
@@ -422,6 +447,7 @@ const Products = () => {
                     size="small"
                     variant="outlined"
                     color="#FE8400"
+                    value={value[1]}
                     style={{ width: "79px" }}
                     onChange={handleTextInputChangeMax}
                   />
@@ -430,10 +456,18 @@ const Products = () => {
             </div>
             <div className={classes.univ}>
               <div style={{ justifyContent: "space-between", display: "flex" }}>
-                <Button className={classes.button} variant="contained">
+                <Button
+                  onClick={handleApplyFilters}
+                  className={classes.button}
+                  variant="contained"
+                >
                   Apply
                 </Button>
-                <Button className={classes.button2} variant="contained">
+                <Button
+                  onClick={handleRemoveFilters}
+                  className={classes.button2}
+                  variant="contained"
+                >
                   Reset
                 </Button>
               </div>
