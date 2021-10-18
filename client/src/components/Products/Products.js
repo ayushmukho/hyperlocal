@@ -16,20 +16,25 @@ import {
   RadioGroup,
   Radio,
 } from "@material-ui/core";
+import { Search, Clear } from "@material-ui/icons";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
 import { useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
-import Product from "./Product/Product";
-import useStyles from "./styles";
 import { useSelector } from "react-redux";
+
+import useStyles from "./styles";
+
+import Product from "./Product/Product";
 import Navbar from "../LandingPage/Navbar/Navbar";
+
 import { getProductsByCategory } from "../../actions/products";
+
 import ProductImage from "../../images/ProductImage";
 import Star from "../../images/star";
 import NoPro from "../../images/noPro.gif";
-import { Search, Clear } from "@material-ui/icons";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -71,7 +76,7 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-const GreenRadio = withStyles({
+const OrangeRadio = withStyles({
   root: {
     color: "#FE8400",
     "&$checked": {
@@ -83,18 +88,22 @@ const GreenRadio = withStyles({
 
 const Products = () => {
   const classes = useStyles();
-  const { cat } = useParams();
+
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [search, setSearch] = useState("");
-  const [sorting, setSorting] = useState("");
+  const { cat } = useParams();
+
   const categoriesData = useSelector((state) => state.getAllCategories);
   const productData = useSelector((state) => state.getAllProductsByCategory);
+
   const { isLoading, products } = productData;
+
+  const [search, setSearch] = useState("");
+  const [sorting, setSorting] = useState("");
   const [category, setCategory] = useState({});
   const [output, setOutput] = useState([]);
-  const dispatch = useDispatch();
-  const [value, setValue] = useState([0, 10000]);
-  const [state, setState] = useState({
+  const [sliderValue, setSliderValue] = useState([0, 10000]);
+  const [rating, setRating] = useState({
     checked1: false,
     checked2: false,
     checked3: false,
@@ -111,7 +120,7 @@ const Products = () => {
   };
 
   const handleChangeSlider = (event, newValue) => {
-    setValue(newValue);
+    setSliderValue(newValue);
   };
 
   const handleSearch = () => {
@@ -123,31 +132,31 @@ const Products = () => {
   };
 
   const handleTextInputChangeMin = (event) => {
-    let newArr = [...value];
+    let newArr = [...sliderValue];
     newArr[0] = event.target.value;
-    setValue(newArr);
+    setSliderValue(newArr);
   };
 
   const handleTextInputChangeMax = (event) => {
-    let newArr = [...value];
+    let newArr = [...sliderValue];
     newArr[1] = event.target.value;
-    setValue(newArr);
+    setSliderValue(newArr);
   };
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  const handleRatingChange = (event) => {
+    setRating({ ...rating, [event.target.name]: event.target.checked });
   };
 
-  const priceFilterAsc = (vals) => {
-    return vals.sort((a, b) => {
+  const priceFilterAsc = (val) => {
+    return val.sort((a, b) => {
       const aPrice = a.price;
       const bPrice = b.price;
       return aPrice - bPrice;
     });
   };
 
-  const priceFilterDsc = (vals) => {
-    return vals.sort((a, b) => {
+  const priceFilterDsc = (val) => {
+    return val.sort((a, b) => {
       const aPrice = a.price;
       const bPrice = b.price;
       return bPrice - aPrice;
@@ -158,21 +167,21 @@ const Products = () => {
     setOutput([]);
     // eslint-disable-next-line array-callback-return
     products.filter((val) => {
-      if(val.price >= value[0] && val.price <= value[1]) {
+      if (val.price >= sliderValue[0] && val.price <= sliderValue[1]) {
         setOutput((output) => [...output, val]);
       }
-    })
+    });
   };
 
   const handleRemoveFilters = () => {
-    setState({
+    setRating({
       checked1: false,
       checked2: false,
       checked3: false,
       checked4: false,
       checked5: false,
     });
-    setValue([0, 10000]);
+    setSliderValue([0, 10000]);
     setOutput(products);
   };
 
@@ -262,7 +271,7 @@ const Products = () => {
               >
                 <FormControlLabel
                   value="asc"
-                  control={<GreenRadio />}
+                  control={<OrangeRadio />}
                   label={
                     <Typography style={{ fontSize: "12px" }}>
                       Sort in Asc
@@ -271,7 +280,7 @@ const Products = () => {
                 />
                 <FormControlLabel
                   value="dsc"
-                  control={<GreenRadio />}
+                  control={<OrangeRadio />}
                   label={
                     <Typography style={{ fontSize: "12px" }}>
                       Sort in Dsc
@@ -327,8 +336,8 @@ const Products = () => {
                 <FormControlLabel
                   control={
                     <GreenCheckbox
-                      checked={state.checked5}
-                      onChange={handleChange}
+                      checked={rating.checked5}
+                      onChange={handleRatingChange}
                       name="checked5"
                     />
                   }
@@ -343,8 +352,8 @@ const Products = () => {
                 <FormControlLabel
                   control={
                     <GreenCheckbox
-                      checked={state.checked4}
-                      onChange={handleChange}
+                      checked={rating.checked4}
+                      onChange={handleRatingChange}
                       name="checked4"
                     />
                   }
@@ -359,8 +368,8 @@ const Products = () => {
                 <FormControlLabel
                   control={
                     <GreenCheckbox
-                      checked={state.checked3}
-                      onChange={handleChange}
+                      checked={rating.checked3}
+                      onChange={handleRatingChange}
                       name="checked3"
                     />
                   }
@@ -375,8 +384,8 @@ const Products = () => {
                 <FormControlLabel
                   control={
                     <GreenCheckbox
-                      checked={state.checked2}
-                      onChange={handleChange}
+                      checked={rating.checked2}
+                      onChange={handleRatingChange}
                       name="checked2"
                     />
                   }
@@ -391,8 +400,8 @@ const Products = () => {
                 <FormControlLabel
                   control={
                     <GreenCheckbox
-                      checked={state.checked1}
-                      onChange={handleChange}
+                      checked={rating.checked1}
+                      onChange={handleRatingChange}
                       name="checked1"
                     />
                   }
@@ -409,7 +418,7 @@ const Products = () => {
                 Price
               </Typography>
               <PrettoSlider
-                value={value}
+                value={sliderValue}
                 onChange={handleChangeSlider}
                 valueLabelDisplay="auto"
                 aria-label="pretto slider"
@@ -431,7 +440,7 @@ const Products = () => {
                     variant="outlined"
                     color="#FE8400"
                     style={{ width: "79px" }}
-                    value={value[0]}
+                    value={sliderValue[0]}
                     onChange={handleTextInputChangeMin}
                   />
                 </div>
@@ -447,7 +456,7 @@ const Products = () => {
                     size="small"
                     variant="outlined"
                     color="#FE8400"
-                    value={value[1]}
+                    value={sliderValue[1]}
                     style={{ width: "79px" }}
                     onChange={handleTextInputChangeMax}
                   />
