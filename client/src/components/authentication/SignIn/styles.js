@@ -68,12 +68,30 @@ export default makeStyles((theme) => ({
   },
 
   text: {
+    position: "relative",
+    top: "110px",
+    left: "18px",
+    right: "32px",
+    color: "#FFFFFF",
+    fontSize: "32px",
+   
+    inlineHeight: "36px",
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+      paddingRight: "50px",
+      color: "#FFFFFF",
+      fontSize: "30px",
+      inlineHeight: "36px",
+    },
+  },
+  text1: {
     position: 'relative',
     top: '110px',
-    left: '36px',
+    left: '10px',
     right: '36px',
     color: '#FFFFFF',
-    fontSize: '36px',
+    
+    fontSize: '34px',
     inlineHeight: '36px',
     [theme.breakpoints.down('md')]: {
       position: 'relative',
@@ -146,4 +164,11 @@ export default makeStyles((theme) => ({
     height: '50px',
     marginTop: '20px',
   },
+  forgot:{
+    marginTop: '20px',
+    color: 'blue',
+    
+    
+  },
+ 
 }))

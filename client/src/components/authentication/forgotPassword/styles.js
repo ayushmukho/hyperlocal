@@ -1,18 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-
 export default makeStyles((theme) => ({
-  modal: {
-    width: "100vw",
-    height: "100vh",
-    overflow : "scroll",
-  },
-
   toplevel1: {
     marginTop: "70px",
     display: "flex",
-
     justifyContent: "center",
+
     [theme.breakpoints.down("md")]: {
       display: "flex",
       justifyContent: "center",
@@ -48,6 +41,8 @@ export default makeStyles((theme) => ({
     borderRadius: "15px",
     backgroundColor: "#Fe8400",
     height: "100%",
+    boxShadow: "50px 50px 70px -12px rgba(0,0,0,0.3)",
+
     position: "relative",
   },
 
@@ -62,8 +57,7 @@ export default makeStyles((theme) => ({
       position: "relative",
       height: "100%",
       paddingBottom: "30px",
-      paddingTop:"0px",
-      
+      paddingTop: "0px",
 
       // paddingRight: "20px"
     },
@@ -71,11 +65,12 @@ export default makeStyles((theme) => ({
 
   text: {
     position: "relative",
-    top: "110px",
+    top: "60px",
     left: "18px",
     right: "32px",
     color: "#FFFFFF",
     fontSize: "32px",
+
     inlineHeight: "36px",
     [theme.breakpoints.down("md")]: {
       position: "relative",
@@ -84,6 +79,12 @@ export default makeStyles((theme) => ({
       fontSize: "30px",
       inlineHeight: "36px",
     },
+  },
+  text1: {
+    position: "relative",
+    top: "15px",
+    color: "#FFFFFF",
+    fontSize: "34px",
   },
 
   logo: {
@@ -97,6 +98,7 @@ export default makeStyles((theme) => ({
     position: "relative",
     left: "25.74%",
     right: "25.74%",
+    // top: "70px",
     top: "6px",
     [theme.breakpoints.down("md")]: {
       position: "relative",
@@ -133,18 +135,11 @@ export default makeStyles((theme) => ({
     fontSize: "15px",
     color: "white",
     fontWeight: 900,
-    marginTop: "36px",
+    marginTop: "50px",
   },
-  googleImage: {
-    height: "30px",
-    paddingTop: "5px",
-    marginRight: "10px",
-  },
-  googleButton: {
-    display: "flex",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    height: "50px",
+
+  forgot: {
     marginTop: "20px",
+    color: "blue",
   },
 }));
