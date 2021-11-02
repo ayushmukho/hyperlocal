@@ -45,7 +45,7 @@ const Product = ({ product }) => {
             style={{ textDecoration: "none", marginTop: "5px" }}
           >
             <Button className={classes.button} variant="contained">
-              Buy Now
+              Add To Cart
             </Button>
           </Link>
         </CardContent>
