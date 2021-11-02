@@ -24,3 +24,7 @@ export const fetchSellers = () => API.get("/seller");
 
 /* @CATEGORIES-API */
 export const fetchCategories = () => API.get('/category')
+
+/* @FORGOT PASSWORD-API */
+export const forgotPassword=(email)=>API.post('/auth/forgot',{email})
+export const confirmPassword=(token,password)=>API.post('/auth/reset',{access_token:token,password:password})

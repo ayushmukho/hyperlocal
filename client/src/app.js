@@ -15,6 +15,7 @@ import { getSellers } from "./actions/sellers";
 import { getCategories } from "./actions/categories";
 import "./app.css";
 import ScrollToTop from "./utils/ScrollToTop";
+import ForgotPassword from "./components/authentication/forgotPassword/ForgotPassword";
 const App = () => {
   const dispatch = useDispatch();
   const access_token = localStorage.getItem("access_token");
@@ -41,6 +42,8 @@ const App = () => {
             <Route path="/user/activate/:id" exact component={Activation} />
             <Route path="/login" exact component={SignIn} />
             <Route path="/categories/:cat" exact component={Products} />
+            <Route path="/user/reset/:id" exact component={ForgotPassword} />
+
           </Switch>
           <ToastContainer />
         </ScrollToTop>

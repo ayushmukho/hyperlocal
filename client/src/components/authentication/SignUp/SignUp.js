@@ -24,7 +24,7 @@ import {  useHistory } from "react-router-dom";
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
-import useStyles from "../../LandingPage/Navbar/styles";
+import useStyles from "./styles";
 
 import sally from "../../../images/sally.png";
 import logo from "../../../images/logo.png";
@@ -195,6 +195,7 @@ const SignUp = ({ openSignUp, Close, setOpenSignUp }) => {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
+              
                   >
                     Create Account
                   </Button>
