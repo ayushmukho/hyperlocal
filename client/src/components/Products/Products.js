@@ -32,7 +32,7 @@ import Navbar from "../LandingPage/Navbar/Navbar";
 
 import { getProductsByCategory } from "../../actions/products";
 
-import ProductImage from "../../images/ProductImage";
+import { ReactComponent as Saly } from "../../images/Group 83.svg";
 import Star from "../../images/star";
 import NoPro from "../../images/noPro.gif";
 
@@ -299,7 +299,8 @@ const Products = () => {
           className={classes.container}
         >
           <Grid item sm={2} className={classes.hide}>
-            <ProductImage />
+            {/* <ProductImage /> */}
+            <Saly />
             <div className={classes.univ}>
               <Typography gutterBottom className={classes.categories}>
                 Categories
