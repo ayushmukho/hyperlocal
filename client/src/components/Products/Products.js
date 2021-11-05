@@ -29,7 +29,6 @@ import useStyles from "./styles";
 
 import Product from "./Product/Product";
 import Navbar from "../LandingPage/Navbar/Navbar";
-
 import { getProductsByCategory } from "../../actions/products";
 
 import { ReactComponent as Saly } from "../../images/Group 83.svg";
