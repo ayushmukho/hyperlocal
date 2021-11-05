@@ -8,7 +8,7 @@ export const allProducts = async (req, res) => {
 };
 
 export const oneProduct = async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.productid);
   if (product) {
     res.status(200).json({ message: "Successful", data: product });
   } else {
