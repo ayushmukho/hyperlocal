@@ -21,7 +21,6 @@ import { useFormik } from "formik";
 
 import { useHistory, useParams } from "react-router";
 
-
 const ForgotPassword = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -57,7 +56,6 @@ const ForgotPassword = () => {
       }
     },
   });
- 
 
   return (
     <>

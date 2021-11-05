@@ -47,9 +47,9 @@ export default makeStyles((theme) => ({
     backgroundColor: "#FE8400",
     border: "2px solid #FFDC5F",
     padding: "12px",
-    width: "90px",
+    width: "100px",
     height: "36px",
-    fontSize: "13px",
+    fontSize: "10px",
     color: "white",
   },
 }));
