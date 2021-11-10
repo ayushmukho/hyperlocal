@@ -16,6 +16,7 @@ import { getCategories } from "./actions/categories";
 import "./app.css";
 import ScrollToTop from "./utils/ScrollToTop";
 import ForgotPassword from "./components/authentication/forgotPassword/ForgotPassword";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 const App = () => {
   const dispatch = useDispatch();
   const access_token = localStorage.getItem("access_token");
@@ -43,6 +44,8 @@ const App = () => {
             <Route path="/login" exact component={SignIn} />
             <Route path="/categories/:cat" exact component={Products} />
             <Route path="/user/reset/:id" exact component={ForgotPassword} />
+            <Route path="/productDetails" exact component={ProductDetails} />
+            <Route path="/product/:catId/:prodid" exact component={ProductDetails} />
 
           </Switch>
           <ToastContainer />

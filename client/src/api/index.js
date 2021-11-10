@@ -16,6 +16,9 @@ export const signIn = (formData) => API.post("/auth/login", formData);
 /* @PRODUCT-CATEGORY-API */
 export const fetchProductsByCategory = (cat) => API.get(`/products/category/${cat}`);
 
+/* @GET-SINGLE-PRODUCT */
+export const fetchSingleProduct = (id) => API.get(`/products/one/${id}`);
+
 /* @CART-API */
 export const addToCart = (id) => API.get("/");
 
