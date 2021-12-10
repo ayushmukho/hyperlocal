@@ -7,14 +7,18 @@
   "scripts": {
     "start": "node src/server.js",
     "server": "nodemon src/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node src/data/seeder",
-    "data:destroy": "node src/data/seeder -d"
+    "data:destroy": "node src/data/seeder -d",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Ashutosh Kumar",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
+    "concurrently": "^6.4.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
