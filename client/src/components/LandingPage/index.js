@@ -99,6 +99,7 @@ export default function Index() {
               <Cards
                 name={category.name}
                 img={category.image}
+                id={category._id}
                 description={category.description}
                 color={colours[i]}
               />

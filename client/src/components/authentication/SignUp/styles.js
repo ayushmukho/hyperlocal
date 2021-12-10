@@ -72,10 +72,10 @@ export default makeStyles((theme) => ({
   text: {
     position: "relative",
     top: "110px",
-    left: "36px",
-    right: "36px",
+    left: "18px",
+    right: "32px",
     color: "#FFFFFF",
-    fontSize: "36px",
+    fontSize: "32px",
     inlineHeight: "36px",
     [theme.breakpoints.down("md")]: {
       position: "relative",

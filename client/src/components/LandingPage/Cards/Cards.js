@@ -55,7 +55,7 @@ export default function Cards(props) {
   const component = <Default />
 
   const history = useHistory()
-  const navigateTo = () => history.push(`/categories/${props.name}`)
+  const navigateTo = () => history.push(`/categories/${props.id}`)
 
   return (
     <div>
