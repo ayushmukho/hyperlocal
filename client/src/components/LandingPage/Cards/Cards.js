@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     boxShadow: (props) => `0px 5px 1px 1px ${props.color}`,
     marginBottom: '40px',
-    cursor: 'pointer',
+    cursor: 'pointer',  
     minWidth: 220,
     [theme.breakpoints.down('md')]: {
       minWidth: 250,
@@ -21,14 +21,14 @@ const useStyles = makeStyles((theme) => ({
       transitionDuration: '1s',
     },
     backgroundColor: (props) => props.color,
-    maxHeight: '70px',
+    maxHeight: '200px',
     borderRadius: '20px',
     paddingBottom: '100px',
     maxWidth: '200px',
     marginLeft: '50px',
     filter: `drop-shadow(0 0 0.25rem #ebc3ea)`,
   },
-
+  
   header: {
     marginleft: '00px',
   },
