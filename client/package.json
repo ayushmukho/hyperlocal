@@ -15,6 +15,7 @@
     "classnames": "^2.3.1",
     "formik": "^2.2.9",
     "mobile-detect": "^1.4.5",
+    "pure-react-carousel": "^1.27.6",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.4",
     "react-dom": "^17.0.2",
