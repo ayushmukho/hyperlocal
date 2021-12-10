@@ -11,7 +11,7 @@
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "data:import": "node src/data/seeder",
     "data:destroy": "node src/data/seeder -d",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix client && yarn build --prefix client"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix client && yarn run build --prefix client"
   },
   "author": "Ashutosh Kumar",
   "license": "MIT",
