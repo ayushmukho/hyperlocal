@@ -8,12 +8,20 @@ import {
 import { Link } from "react-router-dom";
 import React from "react";
 import useStyles from "./styles";
+import { useHistory, useParams } from "react-router";
 
 const Product = ({ product }) => {
   const classes = useStyles();
+  const history=useHistory()
+  const {cat}=useParams()
+
+  const reroute=(e)=>{
+   e.preventDefault()
+   history.push(`/product/${cat}/${product._id}`)
+  }
   return (
     <div className="App">
-      <Card className={classes.card}>
+      <Card className={classes.card} onClick={reroute}>
         <CardMedia
           className={classes.media}
           image={
@@ -44,7 +52,7 @@ const Product = ({ product }) => {
             href="/cart"
             style={{ textDecoration: "none", marginTop: "5px" }}
           >
-            <Button className={classes.button} variant="contained">
+            <Button className={classes.button} variant="contained" >
               Add To Cart
             </Button>
           </Link>
