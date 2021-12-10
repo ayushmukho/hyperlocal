@@ -56,7 +56,7 @@ const App = () => {
             <Route path='/login' exact component={SignIn} />
             <Route path='/categories/:cat' exact component={Products} />
             <Route path='/user/reset/:id' exact component={ForgotPassword} />
-            <Route path='/billing' exact component={Billing} />
+            <PrivateRoute path='/billing' exact component={Billing} />
           </Switch>
           <ToastContainer />
         </ScrollToTop>
